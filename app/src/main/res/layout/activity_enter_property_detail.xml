@@ -47,20 +47,14 @@
                 android:text="Property Title *"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
-            <android.support.design.widget.TextInputLayout
 
-                android:id="@+id/pro_title"
-                android:layout_centerHorizontal="true"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <android.support.design.widget.TextInputEditText
+                <AutoCompleteTextView
                     android:layout_margin="10dp"
                     android:id="@+id/pro_title_ed"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="First Name" />
-            </android.support.design.widget.TextInputLayout>
+
 
 
 
@@ -75,14 +69,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-                         <android.support.v7.widget.AppCompatSpinner
-                          android:id="@+id/type"
-                    android:layout_width="150dp"
-                    android:layout_height="50dp"></android.support.v7.widget.AppCompatSpinner>
+                <android.support.v7.widget.AppCompatSpinner
+                    android:id="@+id/type"
+
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"></android.support.v7.widget.AppCompatSpinner>
                 <android.support.v7.widget.AppCompatSpinner
                     android:id="@+id/status"
+
+                    android:layout_margin="10dp"
                     android:layout_width="150dp"
-                    android:layout_height="50dp"></android.support.v7.widget.AppCompatSpinner>
+                    android:layout_height="wrap_content"></android.support.v7.widget.AppCompatSpinner>
 
             </LinearLayout>
             <TextView
@@ -97,74 +94,37 @@
                 android:rowCount="2"
                 android:columnCount="3"
                 >
-                <android.support.design.widget.TextInputLayout
+                <AutoCompleteTextView
+                    android:layout_margin="10dp"
+                    android:id="@+id/Country_ed"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:hint="Country" />
+                <AutoCompleteTextView
+                    android:layout_margin="10dp"
+                    android:id="@+id/City_ed"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:hint="City" />
+                <AutoCompleteTextView
+                    android:layout_margin="10dp"
+                    android:id="@+id/Area_ed"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:hint="Area" />
 
-                    android:id="@+id/country"
-                    android:layout_centerHorizontal="true"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content">
-                    <android.support.design.widget.TextInputEditText
-                        android:id="@+id/country_ed"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Contry" />
-                </android.support.design.widget.TextInputLayout>
-                <android.support.design.widget.TextInputLayout
-
-                    android:id="@+id/city"
-                    android:layout_centerHorizontal="true"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content">
-                    <android.support.design.widget.TextInputEditText
-                        android:id="@+id/city_ed"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="City" />
-                </android.support.design.widget.TextInputLayout>
-                <android.support.design.widget.TextInputLayout
-
-                    android:id="@+id/area"
-                    android:layout_centerHorizontal="true"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content">
-                    <android.support.design.widget.TextInputEditText
-
-                        android:id="@+id/area_ed"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Area" />
-                </android.support.design.widget.TextInputLayout>
-                <android.support.design.widget.TextInputLayout
-
-                    android:id="@+id/sub_area"
-                    android:layout_centerHorizontal="true"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content">
-                    <android.support.design.widget.TextInputEditText
-                        android:id="@+id/sub_area_ed"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Sub Area" />
-                </android.support.design.widget.TextInputLayout>
-                <android.support.design.widget.TextInputLayout
-
-                    android:id="@+id/sector"
-                    android:layout_centerHorizontal="true"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content">
-                    <android.support.design.widget.TextInputEditText
-
-                        android:id="@+id/sector_ed"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Sector" />
-                </android.support.design.widget.TextInputLayout>
-
+                <AutoCompleteTextView
+                    android:layout_margin="10dp"
+                    android:id="@+id/Subarea_ed"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:hint="Sub-Area" />
+                <AutoCompleteTextView
+                android:layout_margin="10dp"
+                android:id="@+id/sector_ed"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:hint="Sector" />
 
             </GridLayout>
             <TextView
@@ -313,7 +273,7 @@
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="200dp">
+                android:layout_height="400dp">
                 <GridView
                     android:layout_width="match_parent"
                     android:layout_height="0dp"

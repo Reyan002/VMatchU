@@ -131,7 +131,7 @@ public class HomeActivity extends AppCompatActivity
         switch (itemId) {
             case R.id.nav_home:
                 //fragment = new Home();
-
+                startActivity(new Intent(HomeActivity.this,HomeActivity.class));
                 break;
             case R.id.nav_package:
                 fragment = new Package();
