@@ -309,20 +309,31 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
-            <ImageView
-                android:background="@drawable/cornesrs"
-                android:src="@drawable/property"
-                android:id="@+id/propImage"
+
+            <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-            <Button
-                android:textColor="@android:color/white"
-                android:textSize="12sp"
-                android:text="upload Image"
-                android:background="@drawable/buttons"
-                android:id="@+id/btnImage"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="200dp">
+                <GridView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:id="@+id/gv"
+                    android:numColumns="3"
+                    android:layout_weight="1">
+                </GridView>
+                <Button
+                    android:layout_marginTop="10dp"
+                    android:textColor="@android:color/white"
+                    android:textSize="12sp"
+                    android:text="upload Image"
+                    android:background="@drawable/buttons"
+                    android:id="@+id/btnImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+
+            </LinearLayout>
+
             <android.support.design.widget.TextInputLayout
 
                 android:id="@+id/vedioURL"
