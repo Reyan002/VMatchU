@@ -48,84 +48,94 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
-                <AutoCompleteTextView
-                    android:layout_margin="10dp"
+
+            <android.support.design.widget.TextInputLayout
+
+                android:layout_marginTop="10dp"
+                android:id="@+id/pro_title"
+                android:layout_centerHorizontal="true"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <android.support.design.widget.TextInputEditText
+
                     android:id="@+id/pro_title_ed"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="First Name" />
-
-
-
-
+                    android:hint="Title" />
+            </android.support.design.widget.TextInputLayout>
             <TextView
+
                 android:textStyle="bold"
                 android:textSize="18dp"
                 android:text="Property Type *"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <LinearLayout
-                android:padding="5dp"
+
+                android:layout_marginTop="10dp"
+             android:layout_margin="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-                <android.support.v7.widget.AppCompatSpinner
-                    android:id="@+id/type"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"></android.support.v7.widget.AppCompatSpinner>
-                <android.support.v7.widget.AppCompatSpinner
+             <Spinner
+                 android:id="@+id/type"
+                 android:layout_width="175dp"
+                 android:layout_height="wrap_content"></Spinner>
+                <Spinner
                     android:id="@+id/status"
-                    android:layout_margin="10dp"
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"></android.support.v7.widget.AppCompatSpinner>
-
+                    android:layout_width="175dp"
+                    android:layout_height="wrap_content"></Spinner>
             </LinearLayout>
             <TextView
+                android:layout_marginTop="10dp"
                 android:textStyle="bold"
                 android:textSize="18dp"
                 android:text="Property Location *"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <GridLayout
+
+                android:padding="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:rowCount="2"
                 android:columnCount="3"
                 >
                 <AutoCompleteTextView
-                    android:layout_margin="10dp"
+
                     android:id="@+id/Country_ed"
-                    android:layout_width="120dp"
+                    android:layout_width="110dp"
                     android:layout_height="wrap_content"
                     android:hint="Country" />
                 <AutoCompleteTextView
-                    android:layout_margin="10dp"
+
                     android:id="@+id/City_ed"
-                    android:layout_width="120dp"
+                    android:layout_width="110dp"
                     android:layout_height="wrap_content"
                     android:hint="City" />
                 <AutoCompleteTextView
-                    android:layout_margin="10dp"
+
                     android:id="@+id/Area_ed"
-                    android:layout_width="120dp"
+                    android:layout_width="110dp"
                     android:layout_height="wrap_content"
                     android:hint="Area" />
 
                 <AutoCompleteTextView
-                    android:layout_margin="10dp"
                     android:id="@+id/Subarea_ed"
-                    android:layout_width="120dp"
+                    android:layout_width="110dp"
                     android:layout_height="wrap_content"
                     android:hint="Sub-Area" />
                 <AutoCompleteTextView
-                android:layout_margin="10dp"
+
                 android:id="@+id/sector_ed"
-                android:layout_width="120dp"
+                android:layout_width="110dp"
                 android:layout_height="wrap_content"
                 android:hint="Sector" />
 
             </GridLayout>
             <TextView
+                android:layout_marginTop="10dp"
                 android:textStyle="bold"
                 android:textSize="18dp"
                 android:text="Property Price *"
@@ -143,15 +153,18 @@
                     android:id="@+id/price_ed"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Sector" />
+                    android:hint="Price" />
             </android.support.design.widget.TextInputLayout>
             <TextView
+                android:layout_marginTop="10dp"
                 android:textStyle="bold"
                 android:textSize="18dp"
                 android:text="Property Details *"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <GridLayout
+
+                android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:rowCount="2"
@@ -160,87 +173,78 @@
                 <android.support.design.widget.TextInputLayout
 
                     android:id="@+id/size"
-                    android:layout_centerHorizontal="true"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="100dp"
+                    android:layout_width="110dp"
                     android:layout_height="wrap_content">
                     <android.support.design.widget.TextInputEditText
                         android:id="@+id/size_ed"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Contry" />
+                        android:hint="Size*" />
                 </android.support.design.widget.TextInputLayout>
                 <android.support.design.widget.TextInputLayout
-
                     android:id="@+id/areaType"
-                    android:layout_centerHorizontal="true"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="100dp"
+                    android:layout_width="110dp"
                     android:layout_height="wrap_content">
                     <android.support.design.widget.TextInputEditText
                         android:id="@+id/areaType_ed"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="City" />
+                        android:hint="Area Type**" />
                 </android.support.design.widget.TextInputLayout>
                 <android.support.design.widget.TextInputLayout
 
                     android:id="@+id/rooms"
                     android:layout_centerHorizontal="true"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="100dp"
+                    android:layout_width="110dp"
                     android:layout_height="wrap_content">
                     <android.support.design.widget.TextInputEditText
 
                         android:id="@+id/rooms_ed"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Area" />
+                        android:hint="Rooms" />
                 </android.support.design.widget.TextInputLayout>
                 <android.support.design.widget.TextInputLayout
 
                     android:id="@+id/bedrooms"
                     android:layout_centerHorizontal="true"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="100dp"
+                    android:layout_width="110dp"
                     android:layout_height="wrap_content">
                     <android.support.design.widget.TextInputEditText
                         android:id="@+id/bedrooms_ed"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Sub Area" />
+                        android:hint="Bedrooms" />
                 </android.support.design.widget.TextInputLayout>
                 <android.support.design.widget.TextInputLayout
-
                     android:id="@+id/bathroom"
                     android:layout_centerHorizontal="true"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="100dp"
+                    android:layout_width="110dp"
                     android:layout_height="wrap_content">
                     <android.support.design.widget.TextInputEditText
 
                         android:id="@+id/bathroom_ed"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Sector" />
+                        android:hint="Bathrooms" />
                 </android.support.design.widget.TextInputLayout>
                 <android.support.design.widget.TextInputLayout
 
                     android:id="@+id/garages"
                     android:layout_centerHorizontal="true"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="100dp"
+                    android:layout_width="110dp"
                     android:layout_height="wrap_content">
                     <android.support.design.widget.TextInputEditText
 
                         android:id="@+id/garages_ed"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Sector" />
+                        android:hint="Garages" />
                 </android.support.design.widget.TextInputLayout>
 
             </GridLayout>
             <TextView
+                android:layout_marginTop="10dp"
                 android:textStyle="bold"
                 android:textSize="18dp"
                 android:text="Property Description *"
@@ -248,6 +252,7 @@
                 android:layout_height="wrap_content" />
             <android.support.design.widget.TextInputLayout
 
+                android:layout_marginTop="10dp"
                 android:id="@+id/desc"
                 android:layout_centerHorizontal="true"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -258,9 +263,10 @@
                     android:id="@+id/desc_ed"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Sector" />
+                    android:hint="Description" />
             </android.support.design.widget.TextInputLayout>
             <TextView
+                android:layout_marginTop="10dp"
                 android:textStyle="bold"
                 android:textSize="18dp"
                 android:text="Property Media *"
@@ -269,6 +275,7 @@
 
 
             <LinearLayout
+                android:layout_marginTop="10dp"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="400dp">
@@ -294,6 +301,7 @@
 
             <android.support.design.widget.TextInputLayout
 
+                android:layout_marginTop="10dp"
                 android:id="@+id/vedioURL"
                 android:layout_centerHorizontal="true"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -307,7 +315,7 @@
                     android:hint="Vedio URL" />
             </android.support.design.widget.TextInputLayout>
             <android.support.design.widget.TextInputLayout
-
+                android:layout_marginTop="10dp"
                 android:id="@+id/image360"
                 android:layout_centerHorizontal="true"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -321,6 +329,7 @@
                     android:hint="Image 360" />
             </android.support.design.widget.TextInputLayout>
             <Button
+                android:layout_marginTop="10dp"
                 android:textColor="@android:color/white"
                 android:textSize="12sp"
                 android:text="upload Image"
@@ -330,16 +339,19 @@
                 android:layout_height="wrap_content" />
 
             <TextView
+                android:layout_marginTop="10dp"
                 android:textStyle="bold"
                 android:textSize="18dp"
                 android:text="Contact Information"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <RadioButton
+                android:layout_marginTop="20dp"
                 android:text="My Profile Information"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
             <Button
+                android:layout_marginTop="20dp"
                 android:textColor="@android:color/white"
                 android:textSize="12sp"
                 android:text="Submit Property"
