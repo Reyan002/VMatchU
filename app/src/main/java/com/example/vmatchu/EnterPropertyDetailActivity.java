@@ -35,19 +35,34 @@ public class EnterPropertyDetailActivity extends AppCompatActivity {
     Spinner spin;
     String spin_val;
     String[] proType = { "None","Agriculture/Dairy","Apartment/Flat","Banglow/House","Commercial Plot","Commercial Portion/Office Area","Farm House","Hotel","Industrial land","Industrial Plot" ,"Land","Penthouse","Plot","Plot File","Residential Lower Portion","Residential Upper Portion","Restuarent","Shop/Showroom","villa"};//array of strings used to populate the spinner
+    String[] country = {};
+    String[] city = {};
+    String[] area = {};
+    String[] subArea = {};
+    String[] sector = {};
     String[] proStatus = { "For Rent","For Purchase" };//array of strings used to populate the spinner
 
-    AutoCompleteTextView title;
+    AutoCompleteTextView title,countrytxt,citytxt,areatxt,subareatxt,sectortxt;
 
 
-    String[] tit=new String[]{"Pakistan","India","Dubai"};
+    String[] tit={"Pakistan","India","Dubai"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enter_property_detail);
         title=(AutoCompleteTextView)findViewById(R.id.pro_title_ed) ;
-        
+        countrytxt=(AutoCompleteTextView)findViewById(R.id.Country_ed) ;
+        citytxt=(AutoCompleteTextView)findViewById(R.id.City_ed) ;
+        areatxt=(AutoCompleteTextView)findViewById(R.id.Area_ed) ;
+        subareatxt=(AutoCompleteTextView)findViewById(R.id.Subarea_ed) ;
+        sectortxt=(AutoCompleteTextView)findViewById(R.id.sector_ed) ;
+
         title.setAdapter(new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,tit));
+        countrytxt.setAdapter(new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,country));
+        citytxt.setAdapter(new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,city));
+        areatxt.setAdapter(new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,area));
+        subareatxt.setAdapter(new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,subArea));
+        sectortxt.setAdapter(new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,sector));
 
         btn = findViewById(R.id.btnImage);
         gvGallery = (GridView)findViewById(R.id.gv);
