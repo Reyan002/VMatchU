@@ -1,141 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start">
+
+    <include
+        layout="@layout/app_bar_my_property"
         android:layout_width="match_parent"
-        android:background="#fcfcfc"
+        android:layout_height="match_parent" />
+
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        tools:context=".Home2activity">
-        <android.support.design.widget.AppBarLayout
-            android:id="@+id/apBar"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark"
-            android:layout_width="match_parent"
-            android:layout_height="250dp">
-            <android.support.design.widget.CollapsingToolbarLayout
-                app:layout_scrollFlags="exitUntilCollapsed|scroll"
-                android:layout_width="match_parent"
-                app:title="My Property"
-                app:titleTextColor="#FFFFFF"
-                app:expandedTitleMarginStart="60dp"
-                app:expandedTitleMarginEnd="50dp"
-                android:background="@drawable/myproperty"
-                android:layout_height="match_parent">
-                <android.support.v7.widget.Toolbar
-                    app:popupTheme="@style/Base.AlertDialog.AppCompat.Light"
-                    app:layout_collapseMode="pin"
-                    android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"></android.support.v7.widget.Toolbar>
-            </android.support.design.widget.CollapsingToolbarLayout>
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/nav_header_my_property"
+        app:menu="@menu/activity_my_property_drawer" />
 
-
-        </android.support.design.widget.AppBarLayout>
-
-    <android.support.v4.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="25dp"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <Spinner
-                android:id="@+id/spinnerid"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/cornesrs"
-                android:padding="10dp"></Spinner>
-
-            <EditText
-                android:id="@+id/proId"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_below="@+id/spinnerid"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/cornesrs"
-                android:hint="Property ID"
-                android:padding="10dp"
-                android:textSize="15dp" />
-
-            <EditText
-                android:id="@+id/proTitle"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_below="@+id/proId"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/cornesrs"
-                android:hint="Property Title"
-                android:padding="10dp"
-                android:textSize="15dp" />
-
-            <Button
-                android:id="@+id/search"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_below="@+id/proTitle"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/buttons"
-                android:padding="10dp"
-                android:text="Search"
-                android:textColor="@android:color/white"
-                android:textSize="15dp" />
-
-            <TextView
-                android:id="@+id/all"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/search"
-                android:layout_marginTop="50dp"
-                android:text="All (0)"
-                android:textAlignment="center"
-                android:textSize="15dp" />
-
-            <TextView
-                android:id="@+id/approved"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/all"
-                android:layout_marginTop="10dp"
-                android:text="Approved (0)"
-                android:textAlignment="center"
-                android:textSize="15dp" />
-
-            <TextView
-                android:id="@+id/Pending"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/approved"
-                android:layout_marginTop="10dp"
-                android:text="Pending (0)"
-                android:textAlignment="center"
-                android:textSize="15dp" />
-
-            <TextView
-                android:id="@+id/Expired"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/Pending"
-                android:layout_marginTop="10dp"
-                android:text="Expired (0)"
-                android:textAlignment="center"
-                android:textSize="15dp" />
-
-            <TextView
-                android:id="@+id/hidden"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/Expired"
-                android:layout_marginTop="10dp"
-                android:text="Hidden (0)"
-                android:textAlignment="center"
-                android:textSize="15dp" />
-
-
-        </LinearLayout>
-
-    </android.support.v4.widget.NestedScrollView>
-    </android.support.design.widget.CoordinatorLayout>
+</android.support.v4.widget.DrawerLayout>

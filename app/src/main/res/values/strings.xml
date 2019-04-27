@@ -45,4 +45,5 @@
         <item>Juice</item>
         <item>Sparkling Water</item>
     </string-array>
+    <string name="title_activity_my_property">myProperty</string>
 </resources>

@@ -9,11 +9,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".EnterPropertyDetailActivity"></activity>
+        <activity
+            android:name=".myProperty"
+            android:label="@string/title_activity_my_property"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".EnterPropertyDetailActivity" />
         <activity android:name=".myProfileActivity" />
         <activity android:name=".Home2activity" />
         <activity android:name=".submitProperty" />
-        <activity android:name=".myProperty" />
         <activity
             android:name=".HomeActivity"
             android:label="@string/title_activity_home" />
