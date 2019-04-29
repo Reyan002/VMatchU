@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.provider.MediaStore;
 import android.support.annotation.RequiresApi;
+import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,6 +25,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import in.galaxyofandroid.spinerdialog.OnSpinerItemClick;
 import in.galaxyofandroid.spinerdialog.SpinnerDialog;
 
 public class EnterPropertyDetailActivity extends AppCompatActivity {
@@ -36,15 +38,18 @@ public class EnterPropertyDetailActivity extends AppCompatActivity {
     private GalleryAdapter galleryAdapter;
     Spinner spin;
     String spin_val;
-    String[] proType = { "None","Agriculture/Dairy","Apartment/Flat","Banglow/House","Commercial Plot","Commercial Portion/Office Area","Farm House","Hotel","Industrial land","Industrial Plot" ,"Land","Penthouse","Plot","Plot File","Residential Lower Portion","Residential Upper Portion","Restuarent","Shop/Showroom","villa"};//array of strings used to populate the spinner
-    String[] country = {"Pakistan","India","Dubai","Iran","Iraq","Afghanistan"};
 
-    ArrayList<String> items=new ArrayList<>();
-    SpinnerDialog spinnnerDialogue;
+    String[] proType = { "None","Agriculture/Dairy","Apartment/Flat","Banglow/House","Commercial Plot","Commercial Portion/Office Area","Farm House","Hotel","Industrial land","Industrial Plot" ,"Land","Penthouse","Plot","Plot File","Residential Lower Portion","Residential Upper Portion","Restuarent","Shop/Showroom","villa"};//array of strings used to populate the spinner
+
+    TextInputEditText title,areaType;
+    ArrayList<String> country=new ArrayList<>();
+    ArrayList<String> city=new ArrayList<>();
+    ArrayList<String> areaTypeArray=new ArrayList<>();
+    SpinnerDialog spinnnerDialogue,spinnerDialog,DialogAreaType;
 
    String[] proStatus = { "For Rent","For Purchase" };//array of strings used to populate the spinner
 
-    AutoCompleteTextView title,countrytxt,citytxt,areatxt,subareatxt,sectortxt;
+    AutoCompleteTextView countrytxt,citytxt,areatxt,subareatxt,sectortxt;
 
 
     String[] tit={""};
@@ -52,27 +57,72 @@ public class EnterPropertyDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enter_property_detail);
-        spinnnerDialogue=new SpinnerDialog(this,items,"select Item");
-        countrytxt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
-        title=(AutoCompleteTextView)findViewById(R.id.pro_title_ed) ;
+        title=(TextInputEditText) findViewById(R.id.pro_title_ed) ;
+        areaType=(TextInputEditText) findViewById(R.id.areaType_ed) ;
         countrytxt=(AutoCompleteTextView)findViewById(R.id.Country_ed) ;
         citytxt=(AutoCompleteTextView)findViewById(R.id.City_ed) ;
         areatxt=(AutoCompleteTextView)findViewById(R.id.Area_ed) ;
         subareatxt=(AutoCompleteTextView)findViewById(R.id.Subarea_ed) ;
         sectortxt=(AutoCompleteTextView)findViewById(R.id.sector_ed) ;
+        country.add("Pakistan");
+        country.add("India");
+        country.add("Bangladesh");
+        country.add("Iran");
+        country.add("Iraq");
+        country.add("Dubai");
+        country.add("America");
+        city.add("Karachi");
+        city.add("lahore");
+        city.add("Islamabad");
+        city.add("Hyderabad");
+        areaTypeArray.add("None");
+        areaTypeArray.add("Acre");
+        areaTypeArray.add("Kanal");
+        areaTypeArray.add("Marla");
+        areaTypeArray.add("Square Feet");
+        areaTypeArray.add("Square Meter");
+        areaTypeArray.add("Square Yard");
+        spinnerDialog=new SpinnerDialog(this,country,"select Item");
+        spinnerDialog.bindOnSpinerListener(new OnSpinerItemClick() {
+            @Override
+            public void onClick(String item, int position) {
+                countrytxt.setText(item);
+            }
+        });
+        countrytxt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+              spinnerDialog.showSpinerDialog();
+            }
+        });
+        spinnnerDialogue=new SpinnerDialog(this,city,"select Item");
+        spinnnerDialogue.bindOnSpinerListener(new OnSpinerItemClick() {
+            @Override
+            public void onClick(String item, int position) {
+                citytxt.setText(item);
+            }
+        });
+        citytxt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                spinnnerDialogue.showSpinerDialog();
+            }
+        });
 
-        title.setAdapter(new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,tit));
-        countrytxt.setAdapter(new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,country));
-//        citytxt.setAdapter(new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,city));
-//        areatxt.setAdapter(new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,area));
-//        subareatxt.setAdapter(new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,subArea));
-//        sectortxt.setAdapter(new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,sector));
+
+        DialogAreaType=new SpinnerDialog(this,areaTypeArray,"select Item");
+        DialogAreaType.bindOnSpinerListener(new OnSpinerItemClick() {
+            @Override
+            public void onClick(String item, int position) {
+                areaType.setText(item);
+            }
+        });
+        areaType.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogAreaType.showSpinerDialog();
+            }
+        });
 
         btn = findViewById(R.id.btnImage);
         gvGallery = (GridView)findViewById(R.id.gv);
