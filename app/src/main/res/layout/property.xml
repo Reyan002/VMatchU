@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="140dp"
+    android:background="@drawable/cornesrs"
+    >
+
+    <RelativeLayout
+
+        android:layout_marginTop="5dp"
+        android:background="@drawable/cornesrs"
+        android:orientation="horizontal"
+        android:id="@+id/content_main_frame_2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <ImageView
+
+            android:layout_marginLeft="10dp"
+            android:id="@+id/image_prop_2"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/propertyback"
+            android:layout_width="130dp"
+            android:layout_height="120dp" />
+
+        <TextView
+
+            android:textColor="#ffffff"
+            android:textAlignment="center"
+            android:text="03450"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+
+            android:background="@drawable/buttons" />
+        <TextView
+
+            android:textColor="@android:color/black"
+            android:id="@+id/title_myProp_2"
+            android:textSize="18sp"
+            android:text="Behria Town"
+            android:layout_margin="10dp"
+            android:layout_toRightOf="@+id/image_prop_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+
+            android:textSize="8dp"
+            android:id="@+id/active_2"
+            android:textColor="@android:color/holo_green_dark"
+            android:text="Active"
+            android:layout_toRightOf="@+id/image_prop_2"
+            android:layout_below="@+id/title_myProp_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+
+
+
+
+
+            android:id="@+id/location_2"
+            android:drawableLeft="@drawable/mark"
+            android:text="  Karachi"
+            android:layout_toRightOf="@+id/image_prop_2"
+            android:layout_below="@+id/active_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+
+
+
+
+
+            android:id="@+id/status_2"
+            android:drawableLeft="@drawable/battery"
+            android:text="  For Sell"
+            android:layout_toRightOf="@+id/image_prop_2"
+            android:layout_below="@+id/location_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/calenxder_2"
+            android:drawableLeft="@drawable/calendra"
+
+            android:text="  April 30,2019"
+            android:layout_toRightOf="@+id/image_prop_2"
+            android:layout_below="@+id/status_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+
+
+
+</RelativeLayout>
