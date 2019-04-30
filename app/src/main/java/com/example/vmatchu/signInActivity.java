@@ -41,13 +41,13 @@ public class signInActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(signInActivity.this,HomeActivity.class));
-                progressDialog.show();
-                uname = et_username.getText().toString();
-                pass = et_password.getText().toString();
-
-                if(!TextUtils.isEmpty(uname) && !TextUtils.isEmpty(pass)) {
-                    postLogInApi(uname, pass);
-                }
+//                progressDialog.show();
+//                uname = et_username.getText().toString();
+//                pass = et_password.getText().toString();
+//
+//                if(!TextUtils.isEmpty(uname) && !TextUtils.isEmpty(pass)) {
+//                    postLogInApi(uname, pass);
+//                }
 
             }
         });
@@ -71,9 +71,7 @@ public class signInActivity extends AppCompatActivity {
                     progressDialog.dismiss();
                     UserLogin signupResponse = response.body();
                     if(signupResponse.getError().equals("-1")){
-
                         startActivity(new Intent(signInActivity.this,HomeActivity.class));
-
                     }
                     Log.i("response", "post submitted to API." + signupResponse);
                 }

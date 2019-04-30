@@ -57,13 +57,9 @@ public class EnterPropertyDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enter_property_detail);
-        title=(TextInputEditText) findViewById(R.id.pro_title_ed) ;
-        areaType=(TextInputEditText) findViewById(R.id.areaType_ed) ;
-        countrytxt=(AutoCompleteTextView)findViewById(R.id.Country_ed) ;
-        citytxt=(AutoCompleteTextView)findViewById(R.id.City_ed) ;
-        areatxt=(AutoCompleteTextView)findViewById(R.id.Area_ed) ;
-        subareatxt=(AutoCompleteTextView)findViewById(R.id.Subarea_ed) ;
-        sectortxt=(AutoCompleteTextView)findViewById(R.id.sector_ed) ;
+
+        initialize();
+
         country.add("Pakistan");
         country.add("India");
         country.add("Bangladesh");
@@ -192,6 +188,16 @@ public class EnterPropertyDetailActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void initialize() {
+        title=(TextInputEditText) findViewById(R.id.pro_title_ed) ;
+        areaType=(TextInputEditText) findViewById(R.id.areaType_ed) ;
+        countrytxt=(AutoCompleteTextView)findViewById(R.id.Country_ed) ;
+        citytxt=(AutoCompleteTextView)findViewById(R.id.City_ed) ;
+        areatxt=(AutoCompleteTextView)findViewById(R.id.Area_ed) ;
+        subareatxt=(AutoCompleteTextView)findViewById(R.id.Subarea_ed) ;
+        sectortxt=(AutoCompleteTextView)findViewById(R.id.sector_ed) ;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)

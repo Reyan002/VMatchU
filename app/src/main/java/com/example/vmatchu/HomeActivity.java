@@ -1,6 +1,7 @@
 package com.example.vmatchu;
 
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -12,6 +13,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -27,14 +29,30 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.example.vmatchu.CustomAlert.CustomAlert;
+import com.example.vmatchu.DBhelper.DBhelper;
+import com.example.vmatchu.Pojo.PropertyType;
+import com.example.vmatchu.Pojo.UserLogin;
+import com.example.vmatchu.Rest.APIService;
+import com.example.vmatchu.Rest.ApiUtil;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     Button Whatsapp,mypro,subpro;
+    ProgressDialog progressDialog;
+    APIService apiService;
+    DBhelper dBhelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        initialize();
+        getPropertyTypeData();
         final Dialog dialog = new Dialog(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -86,6 +104,47 @@ public class HomeActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    private void initialize() {
+        progressDialog = new ProgressDialog(HomeActivity.this);
+        progressDialog.setMessage("Syncing data...");
+        progressDialog.setCancelable(false);
+
+        apiService = ApiUtil.getAPIService();
+
+        dBhelper = new DBhelper(this);
+    }
+
+    private void getPropertyTypeData() {
+        progressDialog.show();
+
+        Call<PropertyType> call = apiService.getProperty();
+
+        call.enqueue(new Callback<PropertyType>() {
+
+            @Override
+            public void onResponse(Call<PropertyType> call, Response<PropertyType> response) {
+                if(response.isSuccessful()) {
+                    PropertyType propertyTypeResponse = response.body();
+                    if(propertyTypeResponse.getError().equals("-1")){
+                        for(int i=0;i<propertyTypeResponse.getData().size();i++){
+                            dBhelper.addPropertyTypeData(propertyTypeResponse.getData().get(i).getTermId(),
+                                    propertyTypeResponse.getData().get(i).getPropertyName());
+                        }
+                        progressDialog.dismiss();
+                    }
+                    Log.i("response", "post submitted to API." + propertyTypeResponse);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PropertyType> call, Throwable t) {
+                progressDialog.dismiss();
+                CustomAlert.alertDialog(HomeActivity.this,"Response failed");
+                Log.e("response_Failed", "Unable to submit post to API." + t);
+            }
+        });
     }
 
     @Override
