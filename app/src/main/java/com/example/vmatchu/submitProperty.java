@@ -33,7 +33,7 @@ public class submitProperty extends AppCompatActivity {
         rent_take.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(submitProperty.this,EnterPropertyDetailActivity.class));
+                startActivity(new Intent(submitProperty.this,EnterProperptyDetails2Activity.class));
             }
         });
         purchase.setOnClickListener(new View.OnClickListener() {

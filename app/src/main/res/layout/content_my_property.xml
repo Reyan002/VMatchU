@@ -12,8 +12,11 @@
     tools:context=".MainActivity"
     tools:showIn="@layout/app_bar_my_property">
 
-    <FrameLayout
-        android:id="@+id/content_main_frame"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/content_my_property"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+
+
+
 </android.support.v4.widget.NestedScrollView>
