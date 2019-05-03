@@ -7,15 +7,15 @@ public class UserLogin {
     @SerializedName("id")
     @Expose
     private String id;
-    @SerializedName("email")
-    @Expose
-    private String email;
-    @SerializedName("password")
-    @Expose
-    private String password;
     @SerializedName("username")
     @Expose
     private String username;
+    @SerializedName("password")
+    @Expose
+    private String password;
+    @SerializedName("email")
+    @Expose
+    private String email;
     @SerializedName("error")
     @Expose
     private String error;

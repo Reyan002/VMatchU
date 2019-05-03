@@ -15,7 +15,7 @@ public class UserSignup {
     private String password;
     @SerializedName("error")
     @Expose
-    private Integer error;
+    private String error;
 
     public String getId() {
         return id;
@@ -41,11 +41,11 @@ public class UserSignup {
         this.password = password;
     }
 
-    public Integer getError() {
+    public String getError() {
         return error;
     }
 
-    public void setError(Integer error) {
+    public void setError(String error) {
         this.error = error;
     }
 

@@ -40,14 +40,14 @@ public class signInActivity extends AppCompatActivity {
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(signInActivity.this,HomeActivity.class));
-//                progressDialog.show();
-//                uname = et_username.getText().toString();
-//                pass = et_password.getText().toString();
-//
-//                if(!TextUtils.isEmpty(uname) && !TextUtils.isEmpty(pass)) {
-//                    postLogInApi(uname, pass);
-//                }
+//                startActivity(new Intent(signInActivity.this,HomeActivity.class));
+                progressDialog.show();
+                uname = et_username.getText().toString();
+                pass = et_password.getText().toString();
+
+                if(!TextUtils.isEmpty(uname) && !TextUtils.isEmpty(pass)) {
+                    postLogInApi(uname, pass);
+                }
 
             }
         });
@@ -95,7 +95,7 @@ public class signInActivity extends AppCompatActivity {
         apiService = ApiUtil.getAPIService();
 
         progressDialog = new ProgressDialog(signInActivity.this);
-        progressDialog.setMessage("Please Wait...");
+        progressDialog.setMessage("Signing in...");
         progressDialog.setCancelable(false);
 
     }
