@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -19,7 +21,11 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.example.vmatchu.Adpaters.PropertyAdapter;
+import com.example.vmatchu.Classes.PropertiesDetails;
+
 import java.util.ArrayList;
+import java.util.Properties;
 
 import in.galaxyofandroid.spinerdialog.OnSpinerItemClick;
 import in.galaxyofandroid.spinerdialog.SpinnerDialog;
@@ -29,6 +35,8 @@ public class myProperty extends AppCompatActivity
 
     private ArrayList<String> status=new ArrayList<>();
     private ArrayList<String> title=new ArrayList<>();
+    private RecyclerView recyclerView;
+    private RecyclerView.Adapter adapter;
     String spin_val;
    String[] proType={"All status","For Rent","For Sell","want Rent","want Buy"};
 
@@ -50,6 +58,19 @@ public class myProperty extends AppCompatActivity
         title.add("Hall");
         title.add("Office");
         title.add("None");
+
+
+
+        ArrayList<PropertiesDetails> properties=properties();
+        recyclerView=(RecyclerView)findViewById(R.id.content_my_property);
+        RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+
+        adapter=new PropertyAdapter(properties);
+        recyclerView.setAdapter(adapter);
+
+
+
 
 
 
@@ -150,4 +171,56 @@ public class myProperty extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    public ArrayList<PropertiesDetails> properties(){
+        ArrayList<PropertiesDetails> list =new ArrayList<>();
+
+        list.add(new PropertiesDetails(0340,"https://www.google.com/search?q=house+for+sale+in+karachi&source=lnms&tbm=isch&sa=X&ved=0ahUKEwjHx-Lyy_zhAhUDxYUKHdjjDw0Q_AUIDigB&biw=1366&bih=657#imgrc=tBn8Y1d11bfLuM:","House","Active","Karachi","For Sell","09-02-2019"));
+        list.add(new PropertiesDetails(0340,"","House","Active","Karachi","For Sell","09-02-2019"));
+        list.add(new PropertiesDetails(0340,"","House","Active","Karachi","For Sell","09-02-2019"));
+        list.add(new PropertiesDetails(0340,"","House","Active","Karachi","For Sell","09-02-2019"));
+        list.add(new PropertiesDetails(0340,"","House","Active","Karachi","For Sell","09-02-2019"));
+        list.add(new PropertiesDetails(0340,"","House","Active","Karachi","For Sell","09-02-2019"));
+        list.add(new PropertiesDetails(0340,"","House","Active","Karachi","For Sell","09-02-2019"));
+        list.add(new PropertiesDetails(0340,"","House","Active","Karachi","For Sell","09-02-2019"));
+        list.add(new PropertiesDetails(0340,"","House","Active","Karachi","For Sell","09-02-2019"));
+        list.add(new PropertiesDetails(0340,"","House","Active","Karachi","For Sell","09-02-2019"));
+        list.add(new PropertiesDetails(0340,"","House","Active","Karachi","For Sell","09-02-2019"));
+        list.add(new PropertiesDetails(0340,"","House","Active","Karachi","For Sell","09-02-2019"));
+        list.add(new PropertiesDetails(0340,"","House","Active","Karachi","For Sell","09-02-2019"));
+        list.add(new PropertiesDetails(0340,"","House","Active","Karachi","For Sell","09-02-2019"));
+        list.add(new PropertiesDetails(0340,"","House","Active","Karachi","For Sell","09-02-2019"));
+        list.add(new PropertiesDetails(0340,"","House","Active","Karachi","For Sell","09-02-2019"));
+        list.add(new PropertiesDetails(0340,"","House","Active","Karachi","For Sell","09-02-2019"));
+        list.add(new PropertiesDetails(0340,"","House","Active","Karachi","For Sell","09-02-2019"));
+        list.add(new PropertiesDetails(0340,"","House","Active","Karachi","For Sell","09-02-2019"));
+        list.add(new PropertiesDetails(0340,"","House","Active","Karachi","For Sell","09-02-2019"));
+        list.add(new PropertiesDetails(0340,"","House","Active","Karachi","For Sell","09-02-2019"));
+        list.add(new PropertiesDetails(0340,"","House","Active","Karachi","For Sell","09-02-2019"));
+        list.add(new PropertiesDetails(0340,"","House","Active","Karachi","For Sell","09-02-2019"));
+        list.add(new PropertiesDetails(0340,"","House","Active","Karachi","For Sell","09-02-2019"));
+        list.add(new PropertiesDetails(0340,"","House","Active","Karachi","For Sell","09-02-2019"));
+        list.add(new PropertiesDetails(0340,"","House","Active","Karachi","For Sell","09-02-2019"));
+        list.add(new PropertiesDetails(0340,"","House","Active","Karachi","For Sell","09-02-2019"));
+        list.add(new PropertiesDetails(0340,"","House","Active","Karachi","For Sell","09-02-2019"));
+        list.add(new PropertiesDetails(0340,"","House","Active","Karachi","For Sell","09-02-2019"));
+        list.add(new PropertiesDetails(0340,"","House","Active","Karachi","For Sell","09-02-2019"));
+        list.add(new PropertiesDetails(0340,"","House","Active","Karachi","For Sell","09-02-2019"));
+        list.add(new PropertiesDetails(0340,"","House","Active","Karachi","For Sell","09-02-2019"));
+        list.add(new PropertiesDetails(0340,"","House","Active","Karachi","For Sell","09-02-2019"));
+        list.add(new PropertiesDetails(0340,"","House","Active","Karachi","For Sell","09-02-2019"));
+        list.add(new PropertiesDetails(0340,"","House","Active","Karachi","For Sell","09-02-2019"));
+        list.add(new PropertiesDetails(0340,"","House","Active","Karachi","For Sell","09-02-2019"));
+        list.add(new PropertiesDetails(0340,"","House","Active","Karachi","For Sell","09-02-2019"));
+        list.add(new PropertiesDetails(0340,"","House","Active","Karachi","For Sell","09-02-2019"));
+        list.add(new PropertiesDetails(0340,"","House","Active","Karachi","For Sell","09-02-2019"));
+        list.add(new PropertiesDetails(0340,"","House","Active","Karachi","For Sell","09-02-2019"));
+
+
+
+        return list;
+
+    }
+
+
 }
