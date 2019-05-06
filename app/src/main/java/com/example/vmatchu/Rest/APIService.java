@@ -1,7 +1,13 @@
 package com.example.vmatchu.Rest;
 
+import com.example.vmatchu.Pojo.AreaResponse;
+import com.example.vmatchu.Pojo.AreaTypeResponse;
+import com.example.vmatchu.Pojo.CityResponse;
 import com.example.vmatchu.Pojo.InsertPropertyResponse;
+import com.example.vmatchu.Pojo.PropertyStatusResponse;
 import com.example.vmatchu.Pojo.PropertyType;
+import com.example.vmatchu.Pojo.SectorResponse;
+import com.example.vmatchu.Pojo.SubAreaResponse;
 import com.example.vmatchu.Pojo.UserLogin;
 import com.example.vmatchu.Pojo.UserSignup;
 
@@ -73,5 +79,23 @@ public interface APIService {
                                                     @Field("propertyImage") String propertyImage,
                                                     @Field("propertyVideoUrl") String propertyVideoUrl,
                                                     @Field("propertyImage360Url") String propertyImage360Url);
+
+    @GET("getCities.php")
+    Call<CityResponse> getCities();
+
+    @GET("getArea.php")
+    Call<AreaResponse> getArea(@Query("cityId") String cityId);
+
+    @GET("getSubArea.php")
+    Call<SubAreaResponse> getSubArea(@Query("areaId") String areaId);
+
+    @GET("getSector.php")
+    Call<SectorResponse> getSector(@Query("subAreaId") String subAreaId);;
+
+    @GET("getAreaType.php")
+    Call<AreaTypeResponse> getAreaType();
+
+    @GET("getPropertyStatus.php")
+    Call<PropertyStatusResponse> getPropertyStatus();
 
 }

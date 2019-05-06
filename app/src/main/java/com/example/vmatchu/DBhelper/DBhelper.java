@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.example.vmatchu.Pojo.CityAreaSubareaSectorDetailsResponse;
 import com.example.vmatchu.Pojo.PropertyType;
 import com.example.vmatchu.Pojo.PropertyTypeData;
 
@@ -24,6 +25,12 @@ public class DBhelper extends SQLiteOpenHelper {
 
     private static final String TABLE_USER_DETAILS = "userDetails";
     private static final String TABLE_PROPERTY_TYPE = "propertyType";
+    private static final String TABLE_CITY = "city";
+    private static final String TABLE_AREA = "area";
+    private static final String TABLE_SUB_AREA = "subArea";
+    private static final String TABLE_SECTOR = "sector";
+    private static final String TABLE_AREA_TYPE = "areaType";
+    private static final String TABLE_PROPERTY_STATUS = "propertyStatus";
 
 
 
@@ -52,11 +59,35 @@ public class DBhelper extends SQLiteOpenHelper {
         String createPropertyTypeTable = "CREATE TABLE IF NOT EXISTS " + TABLE_PROPERTY_TYPE + " (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, " +
                 "term_id text not null,property_name text not null)";
 
+        String createCityTable = "CREATE TABLE IF NOT EXISTS " + TABLE_CITY + " (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, " +
+                "term_id text not null,property_name text not null)";
+
+        String createAreaTable = "CREATE TABLE IF NOT EXISTS " + TABLE_AREA + " (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, " +
+                "term_id text not null,property_name text not null)";
+
+        String createSubAreaTable = "CREATE TABLE IF NOT EXISTS " + TABLE_SUB_AREA + " (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, " +
+                "term_id text not null,property_name text not null)";
+
+        String createSectorTable = "CREATE TABLE IF NOT EXISTS " + TABLE_SECTOR + " (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, " +
+                "term_id text not null,property_name text not null)";
+
+        String createAreaType = "CREATE TABLE IF NOT EXISTS " + TABLE_AREA_TYPE + " (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, " +
+                "term_id text not null,property_name text not null)";
+
+        String createPropertyStatus = "CREATE TABLE IF NOT EXISTS " + TABLE_PROPERTY_STATUS + " (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, " +
+                "term_id text not null,property_name text not null)";
+
 
 
 
         db.execSQL(createUserDetailsTable);
         db.execSQL(createPropertyTypeTable);
+        db.execSQL(createCityTable);
+        db.execSQL(createAreaTable);
+        db.execSQL(createSubAreaTable);
+        db.execSQL(createSectorTable);
+        db.execSQL(createAreaType);
+        db.execSQL(createPropertyStatus);
 
     }
 
@@ -103,6 +134,197 @@ public class DBhelper extends SQLiteOpenHelper {
             do {
 
                 arrayList.add(new PropertyTypeData(c.getString(1),
+                        c.getString(2)));
+
+            } while (c.moveToNext());
+        }
+        c.close();
+        db.close();
+        return arrayList;
+    }
+
+
+
+
+
+
+    public void addCities(String term_id, String property_name) {
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put("term_id", term_id);
+        contentValues.put("property_name", property_name);
+
+        long status = insertTableData(TABLE_CITY, contentValues);
+        if (status != -1) {
+            Log.i(TAG, "Row Succesfully Inserted");
+        }
+    }
+
+    public ArrayList<CityAreaSubareaSectorDetailsResponse> getCities() {
+        ArrayList<CityAreaSubareaSectorDetailsResponse> arrayList = new ArrayList<>();
+        db = getWritableDatabase();
+        String query = "SELECT term_id, property_name FROM " + TABLE_CITY + "";
+
+        Cursor c = db.rawQuery(query, null);
+        if (c != null && c.moveToFirst()) {
+            do {
+
+                arrayList.add(new CityAreaSubareaSectorDetailsResponse(c.getString(1),
+                        c.getString(2)));
+
+            } while (c.moveToNext());
+        }
+        c.close();
+        db.close();
+        return arrayList;
+    }
+
+    public void addArea(String term_id, String property_name) {
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put("term_id", term_id);
+        contentValues.put("property_name", property_name);
+
+        long status = insertTableData(TABLE_AREA, contentValues);
+        if (status != -1) {
+            Log.i(TAG, "Row Succesfully Inserted");
+        }
+    }
+
+    public ArrayList<CityAreaSubareaSectorDetailsResponse> getArea() {
+        ArrayList<CityAreaSubareaSectorDetailsResponse> arrayList = new ArrayList<>();
+        db = getWritableDatabase();
+        String query = "SELECT term_id, property_name FROM " + TABLE_AREA + "";
+
+        Cursor c = db.rawQuery(query, null);
+        if (c != null && c.moveToFirst()) {
+            do {
+
+                arrayList.add(new CityAreaSubareaSectorDetailsResponse(c.getString(1),
+                        c.getString(2)));
+
+            } while (c.moveToNext());
+        }
+        c.close();
+        db.close();
+        return arrayList;
+    }
+
+    public void addSubArea(String term_id, String property_name) {
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put("term_id", term_id);
+        contentValues.put("property_name", property_name);
+
+        long status = insertTableData(TABLE_SUB_AREA, contentValues);
+        if (status != -1) {
+            Log.i(TAG, "Row Succesfully Inserted");
+        }
+    }
+
+    public ArrayList<CityAreaSubareaSectorDetailsResponse> getSubArea() {
+        ArrayList<CityAreaSubareaSectorDetailsResponse> arrayList = new ArrayList<>();
+        db = getWritableDatabase();
+        String query = "SELECT term_id, property_name FROM " + TABLE_SUB_AREA + "";
+
+        Cursor c = db.rawQuery(query, null);
+        if (c != null && c.moveToFirst()) {
+            do {
+
+                arrayList.add(new CityAreaSubareaSectorDetailsResponse(c.getString(1),
+                        c.getString(2)));
+
+            } while (c.moveToNext());
+        }
+        c.close();
+        db.close();
+        return arrayList;
+    }
+
+    public void addSector(String term_id, String property_name) {
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put("term_id", term_id);
+        contentValues.put("property_name", property_name);
+
+        long status = insertTableData(TABLE_SECTOR, contentValues);
+        if (status != -1) {
+            Log.i(TAG, "Row Succesfully Inserted");
+        }
+    }
+
+    public ArrayList<CityAreaSubareaSectorDetailsResponse> getSector() {
+        ArrayList<CityAreaSubareaSectorDetailsResponse> arrayList = new ArrayList<>();
+        db = getWritableDatabase();
+        String query = "SELECT term_id, property_name FROM " + TABLE_SECTOR + "";
+
+        Cursor c = db.rawQuery(query, null);
+        if (c != null && c.moveToFirst()) {
+            do {
+
+                arrayList.add(new CityAreaSubareaSectorDetailsResponse(c.getString(1),
+                        c.getString(2)));
+
+            } while (c.moveToNext());
+        }
+        c.close();
+        db.close();
+        return arrayList;
+    }
+
+    public void addAreaType(String term_id, String property_name) {
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put("term_id", term_id);
+        contentValues.put("property_name", property_name);
+
+        long status = insertTableData(TABLE_AREA_TYPE, contentValues);
+        if (status != -1) {
+            Log.i(TAG, "Row Succesfully Inserted");
+        }
+    }
+
+    public ArrayList<CityAreaSubareaSectorDetailsResponse> getAreaType() {
+        ArrayList<CityAreaSubareaSectorDetailsResponse> arrayList = new ArrayList<>();
+        db = getWritableDatabase();
+        String query = "SELECT term_id, property_name FROM " + TABLE_AREA_TYPE + "";
+
+        Cursor c = db.rawQuery(query, null);
+        if (c != null && c.moveToFirst()) {
+            do {
+
+                arrayList.add(new CityAreaSubareaSectorDetailsResponse(c.getString(1),
+                        c.getString(2)));
+
+            } while (c.moveToNext());
+        }
+        c.close();
+        db.close();
+        return arrayList;
+    }
+
+    public void addPropertyStatus(String term_id, String property_name) {
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put("term_id", term_id);
+        contentValues.put("property_name", property_name);
+
+        long status = insertTableData(TABLE_PROPERTY_STATUS, contentValues);
+        if (status != -1) {
+            Log.i(TAG, "Row Succesfully Inserted");
+        }
+    }
+
+    public ArrayList<CityAreaSubareaSectorDetailsResponse> getPropertyStatus() {
+        ArrayList<CityAreaSubareaSectorDetailsResponse> arrayList = new ArrayList<>();
+        db = getWritableDatabase();
+        String query = "SELECT term_id, property_name FROM " + TABLE_PROPERTY_STATUS + "";
+
+        Cursor c = db.rawQuery(query, null);
+        if (c != null && c.moveToFirst()) {
+            do {
+
+                arrayList.add(new CityAreaSubareaSectorDetailsResponse(c.getString(1),
                         c.getString(2)));
 
             } while (c.moveToNext());

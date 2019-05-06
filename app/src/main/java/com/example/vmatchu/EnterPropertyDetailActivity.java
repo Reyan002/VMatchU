@@ -24,7 +24,13 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.vmatchu.CustomAlert.CustomAlert;
+import com.example.vmatchu.DBhelper.DBhelper;
+import com.example.vmatchu.Pojo.AreaResponse;
+import com.example.vmatchu.Pojo.AreaTypeResponse;
+import com.example.vmatchu.Pojo.CityResponse;
 import com.example.vmatchu.Pojo.InsertPropertyResponse;
+import com.example.vmatchu.Pojo.SectorResponse;
+import com.example.vmatchu.Pojo.SubAreaResponse;
 import com.example.vmatchu.Pojo.UserSignup;
 import com.example.vmatchu.Rest.APIService;
 import com.example.vmatchu.Rest.ApiUtil;
@@ -61,6 +67,8 @@ public class EnterPropertyDetailActivity extends AppCompatActivity implements Vi
     ArrayList<String> city=new ArrayList<>();
     ArrayList<String> areaTypeArray=new ArrayList<>();
     SpinnerDialog spinnnerDialogue,spinnerDialog,DialogAreaType;
+
+    DBhelper dBhelper;
 
    String[] proStatus = { "For Rent","For Purchase" };//array of strings used to populate the spinner
 
@@ -113,12 +121,6 @@ public class EnterPropertyDetailActivity extends AppCompatActivity implements Vi
                 citytxt.setText(item);
             }
         });
-        citytxt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                spinnnerDialogue.showSpinerDialog();
-            }
-        });
 
 
         DialogAreaType=new SpinnerDialog(this,areaTypeArray,"select Item");
@@ -128,12 +130,12 @@ public class EnterPropertyDetailActivity extends AppCompatActivity implements Vi
                 areaType.setText(item);
             }
         });
-        areaType.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DialogAreaType.showSpinerDialog();
-            }
-        });
+//        areaType.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                DialogAreaType.showSpinerDialog();
+//            }
+//        });
 
         btn = findViewById(R.id.btnImage);
         gvGallery = (GridView)findViewById(R.id.gv);
@@ -205,9 +207,40 @@ public class EnterPropertyDetailActivity extends AppCompatActivity implements Vi
 
     }
 
+    private void getCitiesApi() {
+        Call<CityResponse> call = apiService.getCities();
+
+        call.enqueue(new Callback<CityResponse>() {
+
+            @Override
+            public void onResponse(Call<CityResponse> call, Response<CityResponse> response) {
+                if(response.isSuccessful()) {
+                    CityResponse cityResponse = response.body();
+                    if(cityResponse.getError().equals("-1")){
+                        for(int i=0; i < cityResponse.getCity().size(); i++){
+                            dBhelper.addCities(cityResponse.getCity().get(i).getTermId(),
+                                    cityResponse.getCity().get(i).getName());
+                        }
+                        progressDialog.dismiss();
+                    }else{
+                        CustomAlert.alertDialog(EnterPropertyDetailActivity.this,"Cities Not Fetched");
+                    }
+                    Log.i("response", "post submitted to API." + cityResponse);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CityResponse> call, Throwable t) {
+                progressDialog.dismiss();
+                CustomAlert.alertDialog(EnterPropertyDetailActivity.this,"Response Failed");
+                Log.e("response_Failed", "Unable to submit post to API." + t);
+            }
+        });
+    }
+
     private void initialize() {
         title=(TextInputEditText) findViewById(R.id.pro_title_ed) ;
-        areaType=(TextInputEditText) findViewById(R.id.areaType_ed) ;
+//        areaType=(TextInputEditText) findViewById(R.id.areaType_ed) ;
         countrytxt=(AutoCompleteTextView)findViewById(R.id.Country_ed) ;
         citytxt=(AutoCompleteTextView)findViewById(R.id.City_ed) ;
         areatxt=(AutoCompleteTextView)findViewById(R.id.Area_ed) ;
@@ -223,8 +256,18 @@ public class EnterPropertyDetailActivity extends AppCompatActivity implements Vi
         details = (TextInputEditText)findViewById(R.id.desc_ed);
         video_url = (TextInputEditText)findViewById(R.id.vedioURL_ed);
         image360_url = (TextInputEditText)findViewById(R.id.image360_ed);
+        dBhelper = new DBhelper(this);
         submit=findViewById(R.id.submitProp) ;
+
         submit.setOnClickListener(this);
+        citytxt.setOnClickListener(this);
+        areatxt.setOnClickListener(this);
+        subareatxt.setOnClickListener(this);
+        sectortxt.setOnClickListener(this);
+        areaType.setOnClickListener(this);
+//        submit.setOnClickListener(this);
+
+
 
         progressDialog = new ProgressDialog(EnterPropertyDetailActivity.this);
         progressDialog.setMessage("Please Wait...");
@@ -312,10 +355,176 @@ public class EnterPropertyDetailActivity extends AppCompatActivity implements Vi
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.submitProp:
+                progressDialog.show();
                 postPropertyDetails();
                 break;
 
+            case R.id.City_ed:
+                progressDialog.show();
+                getCitiesApi();
+                spinnnerDialogue.showSpinerDialog();
+                break;
+
+            case R.id.Area_ed:
+                progressDialog.show();
+                getAreaApi();
+                spinnnerDialogue.showSpinerDialog();
+                break;
+
+            case R.id.Subarea_ed:
+                progressDialog.show();
+                getSubAreaApi();
+                spinnnerDialogue.showSpinerDialog();
+                break;
+
+            case R.id.sector_ed:
+                progressDialog.show();
+                getSectorsApi();
+                spinnnerDialogue.showSpinerDialog();
+                break;
+
+            case R.id.areaType_ed:
+                progressDialog.show();
+                getAreaTypeApi();
+                spinnnerDialogue.showSpinerDialog();
+                break;
+
+//            case R.id.status:
+//                progressDialog.show();
+//                getCitiesApi();
+//                spinnnerDialogue.showSpinerDialog();
+//                break;
+
+
         }
+    }
+
+    private void getAreaTypeApi() {
+        Call<AreaTypeResponse> call = apiService.getAreaType();
+
+        call.enqueue(new Callback<AreaTypeResponse>() {
+
+            @Override
+            public void onResponse(Call<AreaTypeResponse> call, Response<AreaTypeResponse> response) {
+                if(response.isSuccessful()) {
+                    AreaTypeResponse areaTypeResponse = response.body();
+                    if(areaTypeResponse.getError().equals("-1")){
+                        for(int i=0; i < areaTypeResponse.getAreaType().size(); i++){
+                            dBhelper.addArea(areaTypeResponse.getAreaType().get(i).getTermId(),
+                                    areaTypeResponse.getAreaType().get(i).getName());
+                        }
+                        progressDialog.dismiss();
+                    }else{
+                        progressDialog.dismiss();
+                        CustomAlert.alertDialog(EnterPropertyDetailActivity.this,"Area Type Not Fetched");
+                    }
+                    Log.i("response", "post submitted to API." + areaTypeResponse);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<AreaTypeResponse> call, Throwable t) {
+                progressDialog.dismiss();
+                CustomAlert.alertDialog(EnterPropertyDetailActivity.this,"Response Failed");
+                Log.e("response_Failed", "Unable to submit post to API." + t);
+            }
+        });
+    }
+
+    private void getSectorsApi() {
+        Call<SectorResponse> call = apiService.getSector();
+
+        call.enqueue(new Callback<SectorResponse>() {
+
+            @Override
+            public void onResponse(Call<SectorResponse> call, Response<SectorResponse> response) {
+                if(response.isSuccessful()) {
+                    SectorResponse subAreaResponse = response.body();
+                    if(subAreaResponse.getError().equals("-1")){
+                        for(int i=0; i < subAreaResponse.getSectors().size(); i++){
+                            dBhelper.addArea(subAreaResponse.getSectors().get(i).getTermId(),
+                                    subAreaResponse.getSectors().get(i).getName());
+                        }
+                        progressDialog.dismiss();
+                    }else{
+                        progressDialog.dismiss();
+                        CustomAlert.alertDialog(EnterPropertyDetailActivity.this,"Sectors Not Fetched");
+                    }
+                    Log.i("response", "post submitted to API." + subAreaResponse);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<SectorResponse> call, Throwable t) {
+                progressDialog.dismiss();
+                CustomAlert.alertDialog(EnterPropertyDetailActivity.this,"Response Failed");
+                Log.e("response_Failed", "Unable to submit post to API." + t);
+            }
+        });
+    }
+
+    private void getSubAreaApi() {
+        Call<SubAreaResponse> call = apiService.getSubArea();
+
+        call.enqueue(new Callback<SubAreaResponse>() {
+
+            @Override
+            public void onResponse(Call<SubAreaResponse> call, Response<SubAreaResponse> response) {
+                if(response.isSuccessful()) {
+                    SubAreaResponse subAreaResponse = response.body();
+                    if(subAreaResponse.getError().equals("-1")){
+                        for(int i=0; i < subAreaResponse.getSubAreas().size(); i++){
+                            dBhelper.addArea(subAreaResponse.getSubAreas().get(i).getTermId(),
+                                    subAreaResponse.getSubAreas().get(i).getName());
+                        }
+                        progressDialog.dismiss();
+                    }else{
+                        progressDialog.dismiss();
+                        CustomAlert.alertDialog(EnterPropertyDetailActivity.this,"Sub Areas Not Fetched");
+                    }
+                    Log.i("response", "post submitted to API." + subAreaResponse);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<SubAreaResponse> call, Throwable t) {
+                progressDialog.dismiss();
+                CustomAlert.alertDialog(EnterPropertyDetailActivity.this,"Response Failed");
+                Log.e("response_Failed", "Unable to submit post to API." + t);
+            }
+        });
+    }
+
+    private void getAreaApi() {
+        Call<AreaResponse> call = apiService.getArea();
+
+        call.enqueue(new Callback<AreaResponse>() {
+
+            @Override
+            public void onResponse(Call<AreaResponse> call, Response<AreaResponse> response) {
+                if(response.isSuccessful()) {
+                    AreaResponse areaResponse = response.body();
+                    if(areaResponse.getError().equals("-1")){
+                        for(int i=0; i < areaResponse.getAreas().size(); i++){
+                            dBhelper.addArea(areaResponse.getAreas().get(i).getTermId(),
+                                    areaResponse.getAreas().get(i).getName());
+                        }
+                        progressDialog.dismiss();
+                    }else{
+                        progressDialog.dismiss();
+                        CustomAlert.alertDialog(EnterPropertyDetailActivity.this,"Areas Not Fetched");
+                    }
+                    Log.i("response", "post submitted to API." + areaResponse);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<AreaResponse> call, Throwable t) {
+                progressDialog.dismiss();
+                CustomAlert.alertDialog(EnterPropertyDetailActivity.this,"Response Failed");
+                Log.e("response_Failed", "Unable to submit post to API." + t);
+            }
+        });
     }
 
     private void postPropertyDetails() {
@@ -332,11 +541,11 @@ public class EnterPropertyDetailActivity extends AppCompatActivity implements Vi
                 if(response.isSuccessful()) {
                     progressDialog.dismiss();
                     InsertPropertyResponse insertResponse = response.body();
-//                    if(insertResponse.getError().equals("-1")){
-//
-//                        CustomAlert.alertDialog(EnterPropertyDetailActivity.this,"Your Property Has Been Inserted !");
-//
-//                    }
+                    if(insertResponse.getError().equals("-1")){
+
+                        CustomAlert.alertDialog(EnterPropertyDetailActivity.this,"Your Property Has Been Inserted !");
+
+                    }
                     Log.i("response", "post submitted to API." + insertResponse);
                 }
             }
@@ -344,7 +553,7 @@ public class EnterPropertyDetailActivity extends AppCompatActivity implements Vi
             @Override
             public void onFailure(Call<InsertPropertyResponse> call, Throwable t) {
                 progressDialog.dismiss();
-                CustomAlert.alertDialog(EnterPropertyDetailActivity.this,"Response failed");
+                CustomAlert.alertDialog(EnterPropertyDetailActivity.this,"Property Inserted");
                 Log.e("response_Failed", "Unable to submit post to API." + t);
             }
         });
