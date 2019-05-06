@@ -108,25 +108,33 @@
                     android:layout_width="110dp"
                     android:layout_height="wrap_content"
                     android:hint="Country" />
-                <AutoCompleteTextView
+                <!--<AutoCompleteTextView-->
+
+                    <!--android:id="@+id/City_ed"-->
+                    <!--android:layout_width="110dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:hint="City" />-->
+                <Spinner
 
                     android:id="@+id/City_ed"
-                    android:layout_width="110dp"
                     android:layout_height="wrap_content"
-                    android:hint="City" />
-                <AutoCompleteTextView
+                    android:layout_width="110dp"
+                    >
+
+                </Spinner>
+                <Spinner
 
                     android:id="@+id/Area_ed"
                     android:layout_width="110dp"
                     android:layout_height="wrap_content"
                     android:hint="Area" />
 
-                <AutoCompleteTextView
+                <Spinner
                     android:id="@+id/Subarea_ed"
                     android:layout_width="110dp"
                     android:layout_height="wrap_content"
                     android:hint="Sub-Area" />
-                <AutoCompleteTextView
+                <Spinner
 
                     android:id="@+id/sector_ed"
                     android:layout_width="110dp"
