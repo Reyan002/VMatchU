@@ -13,10 +13,11 @@ public class PropertiesDetails {
 
     }
 
+
     public PropertiesDetails(int id, String imageURL, String title, String status, String city, String type, String date) {
         this.id = id;
-        ImageURL = imageURL;
-        Title = title;
+        this.ImageURL = imageURL;
+        this.Title = title;
         this.status = status;
         this.city = city;
         this.type = type;

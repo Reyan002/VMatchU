@@ -53,7 +53,7 @@ public class HomeActivity extends AppCompatActivity
         setContentView(R.layout.activity_home);
 
         initialize();
-        getPropertyTypeData();
+//        getPropertyTypeData();
 
         final Dialog dialog = new Dialog(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

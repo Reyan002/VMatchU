@@ -35,12 +35,12 @@ public class signInActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
 
-        initialize();
-
+       initialize();
+        //signIn=(Button)findViewById(R.id.signin);
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                startActivity(new Intent(signInActivity.this,HomeActivity.class));
+               // startActivity(new Intent(signInActivity.this,HomeActivity.class));
                 progressDialog.show();
                 uname = et_username.getText().toString();
                 pass = et_password.getText().toString();
@@ -87,7 +87,7 @@ public class signInActivity extends AppCompatActivity {
     }
 
     private void initialize() {
-        signIn=(Button)findViewById(R.id.signin);
+       signIn=(Button)findViewById(R.id.signin);
         newAcc=(TextView)findViewById(R.id.createAcc);
         et_username = findViewById(R.id.userName);
         et_password = findViewById(R.id.Password);

@@ -7,6 +7,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -20,6 +21,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.vmatchu.Adpaters.PropertyAdapter;
 import com.example.vmatchu.Classes.PropertiesDetails;
@@ -33,12 +35,13 @@ import in.galaxyofandroid.spinerdialog.SpinnerDialog;
 public class myProperty extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private  String[] DropDet = {"","Deal Close","Edit","Delete","Pause Matching"};
     private ArrayList<String> status=new ArrayList<>();
     private ArrayList<String> title=new ArrayList<>();
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
-    String spin_val;
-   String[] proType={"All status","For Rent","For Sell","want Rent","want Buy"};
+   private String spin_val;
+   private String[] proType={"All status","For Rent","For Sell","want Rent","want Buy"};
 
    SpinnerDialog spinnerDialog;
     @Override
@@ -62,13 +65,16 @@ public class myProperty extends AppCompatActivity
 
 
         ArrayList<PropertiesDetails> properties=properties();
+        ArrayAdapter<String> arrayAdapter=new ArrayAdapter<String>(this,R.layout.spinner_item,DropDet);
         recyclerView=(RecyclerView)findViewById(R.id.content_my_property);
         RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-
-        adapter=new PropertyAdapter(properties);
+        adapter=new PropertyAdapter(arrayAdapter,this,properties);
         recyclerView.setAdapter(adapter);
+   
 
+
+        //Register a callback to be invoked when an item in this AdapterView has been selected
 
 
 
@@ -105,7 +111,8 @@ public class myProperty extends AppCompatActivity
                     }
 
                 });
-               ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(myProperty.this, R.layout.spinner_item,proType);
+
+                ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(myProperty.this, R.layout.spinner_item,proType);
 
                 spinner.setAdapter(spinnerArrayAdapter);
 

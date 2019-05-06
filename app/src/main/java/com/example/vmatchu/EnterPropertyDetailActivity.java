@@ -42,32 +42,32 @@ public class EnterPropertyDetailActivity extends AppCompatActivity implements Vi
 
     private Button btn;
     int PICK_IMAGE_MULTIPLE = 1;
-    String imageEncoded;
-    List<String> imagesEncodedList;
+    private String imageEncoded;
+    private List<String> imagesEncodedList;
     private GridView gvGallery;
     private GalleryAdapter galleryAdapter;
-    Spinner spinType;
-    Spinner spinStatus;
-    String spin_val_status;
-    String spin_val_type;
-    Button submit;
-    APIService apiService;
-    ProgressDialog progressDialog;
+    private Spinner spinType;
+    private Spinner spinStatus;
+    private String spin_val_status;
+    private String spin_val_type;
+    private Button submit;
+    private APIService apiService;
+    private ProgressDialog progressDialog;
 
-    String[] proType = { "None","Agriculture/Dairy","Apartment/Flat","Banglow/House","Commercial Plot","Commercial Portion/Office Area","Farm House","Hotel","Industrial land","Industrial Plot" ,"Land","Penthouse","Plot","Plot File","Residential Lower Portion","Residential Upper Portion","Restuarent","Shop/Showroom","villa"};//array of strings used to populate the spinner
+    private String[] proType = { "None","Agriculture/Dairy","Apartment/Flat","Banglow/House","Commercial Plot","Commercial Portion/Office Area","Farm House","Hotel","Industrial land","Industrial Plot" ,"Land","Penthouse","Plot","Plot File","Residential Lower Portion","Residential Upper Portion","Restuarent","Shop/Showroom","villa"};//array of strings used to populate the spinner
 
-    TextInputEditText title,areaType;
-    ArrayList<String> country=new ArrayList<>();
-    ArrayList<String> city=new ArrayList<>();
-    ArrayList<String> areaTypeArray=new ArrayList<>();
-    SpinnerDialog spinnnerDialogue,spinnerDialog,DialogAreaType;
+    private TextInputEditText title,areaType;
+    private ArrayList<String> country=new ArrayList<>();
+    private ArrayList<String> city=new ArrayList<>();
+    private ArrayList<String> areaTypeArray=new ArrayList<>();
+    private SpinnerDialog spinnnerDialogue,spinnerDialog,DialogAreaType;
 
-   String[] proStatus = { "For Rent","For Purchase" };//array of strings used to populate the spinner
+    private String[] proStatus = { "For Rent","For Purchase" };//array of strings used to populate the spinner
 
-    AutoCompleteTextView countrytxt,citytxt,areatxt,subareatxt,sectortxt;
-    TextInputEditText price,size,rooms,bedroom,bathroom,garages,details,video_url,image360_url;
+    private AutoCompleteTextView countrytxt,citytxt,areatxt,subareatxt,sectortxt;
+    private TextInputEditText price,size,rooms,bedroom,bathroom,garages,details,video_url,image360_url;
 
-    String[] tit={""};
+    private String[] tit={""};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
