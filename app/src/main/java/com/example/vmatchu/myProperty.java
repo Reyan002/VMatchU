@@ -32,8 +32,7 @@ import java.util.Properties;
 import in.galaxyofandroid.spinerdialog.OnSpinerItemClick;
 import in.galaxyofandroid.spinerdialog.SpinnerDialog;
 
-public class myProperty extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class myProperty extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private  String[] DropDet = {"","Deal Close","Edit","Delete","Pause Matching"};
     private ArrayList<String> status=new ArrayList<>();
@@ -183,47 +182,6 @@ public class myProperty extends AppCompatActivity
         ArrayList<PropertiesDetails> list =new ArrayList<>();
 
         list.add(new PropertiesDetails(0340,"https://www.google.com/search?q=house+for+sale+in+karachi&source=lnms&tbm=isch&sa=X&ved=0ahUKEwjHx-Lyy_zhAhUDxYUKHdjjDw0Q_AUIDigB&biw=1366&bih=657#imgrc=tBn8Y1d11bfLuM:","House","Active","Karachi","For Sell","09-02-2019"));
-        list.add(new PropertiesDetails(0340,"","House","Active","Karachi","For Sell","09-02-2019"));
-        list.add(new PropertiesDetails(0340,"","House","Active","Karachi","For Sell","09-02-2019"));
-        list.add(new PropertiesDetails(0340,"","House","Active","Karachi","For Sell","09-02-2019"));
-        list.add(new PropertiesDetails(0340,"","House","Active","Karachi","For Sell","09-02-2019"));
-        list.add(new PropertiesDetails(0340,"","House","Active","Karachi","For Sell","09-02-2019"));
-        list.add(new PropertiesDetails(0340,"","House","Active","Karachi","For Sell","09-02-2019"));
-        list.add(new PropertiesDetails(0340,"","House","Active","Karachi","For Sell","09-02-2019"));
-        list.add(new PropertiesDetails(0340,"","House","Active","Karachi","For Sell","09-02-2019"));
-        list.add(new PropertiesDetails(0340,"","House","Active","Karachi","For Sell","09-02-2019"));
-        list.add(new PropertiesDetails(0340,"","House","Active","Karachi","For Sell","09-02-2019"));
-        list.add(new PropertiesDetails(0340,"","House","Active","Karachi","For Sell","09-02-2019"));
-        list.add(new PropertiesDetails(0340,"","House","Active","Karachi","For Sell","09-02-2019"));
-        list.add(new PropertiesDetails(0340,"","House","Active","Karachi","For Sell","09-02-2019"));
-        list.add(new PropertiesDetails(0340,"","House","Active","Karachi","For Sell","09-02-2019"));
-        list.add(new PropertiesDetails(0340,"","House","Active","Karachi","For Sell","09-02-2019"));
-        list.add(new PropertiesDetails(0340,"","House","Active","Karachi","For Sell","09-02-2019"));
-        list.add(new PropertiesDetails(0340,"","House","Active","Karachi","For Sell","09-02-2019"));
-        list.add(new PropertiesDetails(0340,"","House","Active","Karachi","For Sell","09-02-2019"));
-        list.add(new PropertiesDetails(0340,"","House","Active","Karachi","For Sell","09-02-2019"));
-        list.add(new PropertiesDetails(0340,"","House","Active","Karachi","For Sell","09-02-2019"));
-        list.add(new PropertiesDetails(0340,"","House","Active","Karachi","For Sell","09-02-2019"));
-        list.add(new PropertiesDetails(0340,"","House","Active","Karachi","For Sell","09-02-2019"));
-        list.add(new PropertiesDetails(0340,"","House","Active","Karachi","For Sell","09-02-2019"));
-        list.add(new PropertiesDetails(0340,"","House","Active","Karachi","For Sell","09-02-2019"));
-        list.add(new PropertiesDetails(0340,"","House","Active","Karachi","For Sell","09-02-2019"));
-        list.add(new PropertiesDetails(0340,"","House","Active","Karachi","For Sell","09-02-2019"));
-        list.add(new PropertiesDetails(0340,"","House","Active","Karachi","For Sell","09-02-2019"));
-        list.add(new PropertiesDetails(0340,"","House","Active","Karachi","For Sell","09-02-2019"));
-        list.add(new PropertiesDetails(0340,"","House","Active","Karachi","For Sell","09-02-2019"));
-        list.add(new PropertiesDetails(0340,"","House","Active","Karachi","For Sell","09-02-2019"));
-        list.add(new PropertiesDetails(0340,"","House","Active","Karachi","For Sell","09-02-2019"));
-        list.add(new PropertiesDetails(0340,"","House","Active","Karachi","For Sell","09-02-2019"));
-        list.add(new PropertiesDetails(0340,"","House","Active","Karachi","For Sell","09-02-2019"));
-        list.add(new PropertiesDetails(0340,"","House","Active","Karachi","For Sell","09-02-2019"));
-        list.add(new PropertiesDetails(0340,"","House","Active","Karachi","For Sell","09-02-2019"));
-        list.add(new PropertiesDetails(0340,"","House","Active","Karachi","For Sell","09-02-2019"));
-        list.add(new PropertiesDetails(0340,"","House","Active","Karachi","For Sell","09-02-2019"));
-        list.add(new PropertiesDetails(0340,"","House","Active","Karachi","For Sell","09-02-2019"));
-        list.add(new PropertiesDetails(0340,"","House","Active","Karachi","For Sell","09-02-2019"));
-
-
 
         return list;
 

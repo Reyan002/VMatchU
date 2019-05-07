@@ -3,6 +3,7 @@ package com.example.vmatchu;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.ClipData;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -15,6 +16,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
@@ -108,7 +110,16 @@ private String cityId,areaId,subareaId,sectorId;
         country.add("Iraq");
         country.add("Dubai");
         country.add("America");
-        city = dBhelper.getCities();
+
+        ArrayList<CityAreaSubareaSectorDetailsResponse> city = new ArrayList<CityAreaSubareaSectorDetailsResponse>();
+        for (int index = 0; index < 100; index++) {
+            CityAreaSubareaSectorDetailsResponse obj = new CityAreaSubareaSectorDetailsResponse("Title " + index,
+                    "Short Description " + index);
+            city.add(index, obj);
+        }
+
+
+
         area = dBhelper.getArea();
         subArea = dBhelper.getSubArea();
         sector = dBhelper.getSector();
@@ -287,13 +298,14 @@ private String cityId,areaId,subareaId,sectorId;
 
         AlertDialog.Builder builder=new AlertDialog.Builder(EnterPropertyDetailActivity.this);
         View view1=getLayoutInflater().inflate(R.layout.show_city,null);
+        builder.setView(view1);
         RecyclerView recyclerView=(RecyclerView)findViewById(R.id.showCity);
         RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
+
         adapter=new cityAdapter(city,this);
         recyclerView.setAdapter(adapter);
-       dialog = builder.create();
-
+        dialog = builder.create();
 
 
 
@@ -591,5 +603,6 @@ private String cityId,areaId,subareaId,sectorId;
             }
         });
     }
+
 }
 
