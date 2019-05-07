@@ -20,9 +20,40 @@
             app:titleTextColor="#FFFFFF"
             app:expandedTitleMarginStart="60dp"
             app:expandedTitleMarginEnd="50dp"
-            android:background="@drawable/propertyone"
+            android:background="@drawable/propertyback"
             android:layout_height="match_parent">
+            <RelativeLayout
 
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/peic"
+                    android:textColor="@android:color/white"
+                    android:layout_margin="10dp"
+                    android:textSize="30dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Price On Sell"
+                    />
+                <LinearLayout
+                    android:layout_marginTop="30dp"
+                android:layout_width="150dp"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_below="@id/peic"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/colorsnew"
+                android:orientation="vertical">
+                <TextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="For Sell"
+                    android:textColor="@android:color/white"
+                    android:textSize="30dp" />
+
+            </LinearLayout>
+            </RelativeLayout>
             <android.support.v7.widget.Toolbar
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
@@ -32,152 +63,200 @@
 
 
     </android.support.design.widget.AppBarLayout>
-    <!--<RelativeLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content">-->
-        <!--<TextView-->
-            <!--android:id="@+id/peic"-->
-            <!--android:textColor="@android:color/white"-->
-            <!--android:layout_margin="10dp"-->
-            <!--android:textSize="30dp"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="Price On Sell"-->
-            <!--/>-->
-        <!--<LinearLayout-->
-            <!--android:background="@android:color/holo_orange_dark"-->
-            <!--android:orientation="vertical"-->
 
-            <!--android:layout_alignParentRight="true"-->
-            <!--android:layout_width="150dp"-->
-            <!--android:layout_height="?attr/actionBarSize">-->
-            <!--<TextView-->
-                <!--android:textColor="@android:color/white"-->
-                <!--android:layout_margin="5dp"-->
-                <!--android:textSize="30dp"-->
-                <!--android:text="For Sell"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content" />-->
-
-        <!--</LinearLayout>-->
-    <!--</RelativeLayout>-->
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <!--<RelativeLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent">-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-            <!--<LinearLayout-->
-                <!--android:id="@+id/idll"-->
-                <!--android:layout_width="150dp"-->
-                <!--android:layout_height="?attr/actionBarSize"-->
-                <!--android:layout_margin="10dp"-->
-                <!--android:background="@android:color/darker_gray"-->
-                <!--android:orientation="vertical">-->
+<LinearLayout
+    android:layout_margin="5dp"
+    android:id="@+id/header"
+    android:orientation="horizontal"
+    android:background="@drawable/colorsnew"
+    android:layout_width="match_parent"
+    android:layout_height="50dp">
 
-                <!--<TextView-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
+    <TextView
+        android:padding="5dp"
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:drawableLeft="@drawable/barcode"
+        android:text="  03401"
+        android:textColor="@android:color/white" />
+    <TextView
+        android:padding="5dp"
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:drawableLeft="@drawable/bed"
+        android:text="  6-0"
+        android:textColor="@android:color/white" />
+    <TextView
+        android:padding="5dp"
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:drawableLeft="@drawable/bed"
+        android:text="  4"
+        android:textColor="@android:color/white" />
+    <TextView
 
-                    <!--android:layout_margin="5dp"-->
-                    <!--android:text="Property ID"-->
-                    <!--android:textColor="@android:color/white" />-->
+android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:drawableLeft="@drawable/bathtub"
+        android:text="  3"
+        android:textColor="@android:color/white" />
 
-                <!--<TextView-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_margin="5dp"-->
-                    <!--android:text="03105"-->
-                    <!--android:textColor="@android:color/white" />-->
-            <!--</LinearLayout>-->
+</LinearLayout>
 
-            <!--<TextView-->
-                <!--android:id="@+id/adress"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_below="@+id/idll"-->
-                <!--android:layout_margin="5dp"-->
-                <!--android:text="Address"-->
-                <!--android:textColor="@color/colorPrimaryNext"-->
-                <!--android:textSize="30sp" />-->
+            <TextView
+                android:layout_below="@+id/header"
+                android:id="@+id/description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
 
-            <!--<LinearLayout-->
-                <!--android:id="@+id/adll"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_below="@+id/adress"-->
-                <!--android:orientation="horizontal">-->
+                android:layout_margin="5dp"
+                android:text="Discription"
+                android:textColor="@color/colorPrimaryNext"
+                android:textSize="30sp" />
 
-                <!--<TextView-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_marginLeft="10dp"-->
-                    <!--android:text="Country"-->
-                    <!--android:textColor="@android:color/black"-->
-                    <!--android:textSize="15dp" />-->
+            <TextView
+                android:id="@+id/desc_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/description"
+                android:padding="10dp"
+                android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum." />
 
-                <!--<TextView-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="    :    " />-->
+            <TextView
+                android:id="@+id/adress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/desc_text"
+                android:layout_margin="5dp"
+                android:text="Address"
+                android:textColor="@color/colorPrimaryNext"
+                android:textSize="30sp" />
 
-                <!--<TextView-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="Pakistan" />-->
+            <LinearLayout
+                android:id="@+id/lladd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/adress"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="-2dp"
+                android:orientation="horizontal">
 
-                <!--<TextView-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_marginLeft="40dp"-->
-                    <!--android:text="City"-->
-                    <!--android:textColor="@android:color/black"-->
-                    <!--android:textSize="15dp" />-->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-                <!--<TextView-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="     :     " />-->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="Country" />
 
-                <!--<TextView-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="Karachi" />-->
-            <!--</LinearLayout>-->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="City" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="Area" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="Sub-Area" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="Sector" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="Pakistan"
+                        android:textColor="@android:color/black" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="Karachi"
+                        android:textColor="@android:color/black" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="Bahria Town Karachi"
+                        android:textColor="@android:color/black" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="Bahria Apartment"
+                        android:textColor="@android:color/black" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="Bahria Apartment - 4 bed"
+                        android:textColor="@android:color/black" />
+
+                </LinearLayout>
+            </LinearLayout>
+
 
             <android.support.design.widget.TabLayout
-
                 android:id="@+id/tabMode"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:tabMode="fixed"
-                app:tabGravity="fill"/>
+                android:layout_below="@id/lladd"
+                app:tabGravity="fill"
+                app:tabMode="fixed" />
 
 
             <android.support.v4.view.ViewPager
                 android:id="@+id/viewpager"
+
+
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior"  />
-
-            <!--<TextView-->
-
-                <!--android:id="@+id/details"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_below="@+id/adll"-->
-                <!--android:layout_margin="5dp"-->
-                <!--android:text="Details"-->
-                <!--android:textColor="@color/colorPrimaryNext"-->
-                <!--android:textSize="30sp" />-->
+                android:layout_height="200dp"
+                android:layout_below="@+id/tabMode"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
 
-
-        <!--</RelativeLayout>-->
+        </RelativeLayout>
 
 
     </android.support.v4.widget.NestedScrollView>

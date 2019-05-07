@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.ClipData;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -17,6 +18,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
@@ -117,11 +119,12 @@ private String cityId,areaId,subareaId,sectorId;
         country.add("Dubai");
         country.add("America");
 
-//        area = dBhelper.getArea();
-//        subArea = dBhelper.getSubArea();
-//        sector = dBhelper.getSector();
 
 
+
+        area = dBhelper.getArea();
+        subArea = dBhelper.getSubArea();
+        sector = dBhelper.getSector();
 
 
         areaTypeArray.add("None");
@@ -316,8 +319,6 @@ private String cityId,areaId,subareaId,sectorId;
         sectortxt.setOnClickListener(this);
         areaType.setOnClickListener(this);
 //        submit.setOnClickListener(this);
-
-
 
 
         progressDialog = new ProgressDialog(EnterPropertyDetailActivity.this);
@@ -632,11 +633,6 @@ private String cityId,areaId,subareaId,sectorId;
             }
         });
     }
-
-//    @Override
-//    public void onItemClicked(int position) {
-//        cityId = city.get(position).getTermId();
-//    }
 
 }
 
