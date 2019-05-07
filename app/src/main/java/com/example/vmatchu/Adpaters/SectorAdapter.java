@@ -1,6 +1,5 @@
 package com.example.vmatchu.Adpaters;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -13,42 +12,40 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.vmatchu.DBhelper.DBhelper;
-import com.example.vmatchu.EnterPropertyDetailActivity;
 import com.example.vmatchu.Interfaces.OnItemClick;
 import com.example.vmatchu.Pojo.CityAreaSubareaSectorDetailsResponse;
-import com.example.vmatchu.R;
 import com.example.vmatchu.SharedPrefs.SaveInSharedPreference;
 
 import java.util.ArrayList;
 
-public class cityAdapter extends RecyclerView.Adapter<cityAdapter.ViewHolderCity>{
+public class SectorAdapter extends RecyclerView.Adapter<SectorAdapter.ViewHolderSector>{
 
-    private ArrayList<CityAreaSubareaSectorDetailsResponse> city;
+    private ArrayList<CityAreaSubareaSectorDetailsResponse> sector;
     private Context context;
     private LayoutInflater mInflater;
     private OnItemClick itemClick;
     SaveInSharedPreference saveInSharedPreference;
     Dialog dialog;
-    AutoCompleteTextView citytxt;
+    AutoCompleteTextView sectortxt;
     DBhelper dBhelper;
 
-    public cityAdapter(ArrayList<CityAreaSubareaSectorDetailsResponse> city, Context context, Dialog dialog, AutoCompleteTextView citytxt) {
-        this.city = city;
+    public SectorAdapter(ArrayList<CityAreaSubareaSectorDetailsResponse> sector, Context context, Dialog dialog, AutoCompleteTextView sectortxt) {
+        this.sector = sector;
         this.context=context;
         this.mInflater = LayoutInflater.from(context);
         saveInSharedPreference = new SaveInSharedPreference(context);
         this.dialog = dialog;
-        this.citytxt = citytxt;
+        this.sectortxt = sectortxt;
         dBhelper = new DBhelper(context);
     }
 
 
     @NonNull
     @Override
-    public ViewHolderCity onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public ViewHolderSector onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
 
         View view= mInflater.inflate(R.layout.city,null);
-        return new ViewHolderCity(view);
+        return new ViewHolderSector(view);
 
     }
 //
@@ -61,18 +58,18 @@ public class cityAdapter extends RecyclerView.Adapter<cityAdapter.ViewHolderCity
 //    }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolderCity viewHolderCity, final int i) {
+    public void onBindViewHolder(@NonNull ViewHolderSector viewHolderSector, final int i) {
 //        ViewHolderCityviewHolderCity=(ViewHolderCity)viewHolder;
-        ViewHolderCity viewHolder1 =(ViewHolderCity)viewHolderCity;
-        String cityName=city.get(i).getName();
-        viewHolder1.city_ed.setText(cityName);
+        ViewHolderSector viewHolder1 =(ViewHolderSector)viewHolderSector;
+        String sectorName=sector.get(i).getName();
+        viewHolder1.sector_ed.setText(sectorName);
 
         viewHolder1.relative_row_city.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String term_id = city.get(i).getTermId();
-                saveInSharedPreference.saveCityId(term_id);
-                citytxt.setText(dBhelper.getCityById(term_id));
+                String term_id = sector.get(i).getTermId();
+                saveInSharedPreference.saveSectorId(term_id);
+                sectortxt.setText(dBhelper.getSectorById(term_id));
                 dialog.dismiss();
             }
         });
@@ -82,8 +79,8 @@ public class cityAdapter extends RecyclerView.Adapter<cityAdapter.ViewHolderCity
 
     @Override
     public int getItemCount() {
-        if(city!=null){
-            return city.size();
+        if(sector!=null){
+            return sector.size();
         }
         else {
             return 0;
@@ -92,19 +89,19 @@ public class cityAdapter extends RecyclerView.Adapter<cityAdapter.ViewHolderCity
 
 
 
-    public class ViewHolderCity extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ViewHolderSector extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         RelativeLayout relative_row_city;
-        TextView city_ed;
+        TextView sector_ed;
 
 
 
 
-        public ViewHolderCity(@NonNull View itemView) {
+        public ViewHolderSector(@NonNull View itemView) {
             super(itemView);
 
             relative_row_city = itemView.findViewById(R.id.relative_row_city);
-            city_ed=itemView.findViewById(R.id.City_ed);
+            sector_ed=itemView.findViewById(R.id.City_ed);
 //
 //            itemView.setClickable(true);
 //            itemView.setOnClickListener((View.OnClickListener) this);

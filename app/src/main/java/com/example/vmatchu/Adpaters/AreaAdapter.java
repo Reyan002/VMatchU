@@ -1,6 +1,5 @@
 package com.example.vmatchu.Adpaters;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -13,42 +12,40 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.vmatchu.DBhelper.DBhelper;
-import com.example.vmatchu.EnterPropertyDetailActivity;
 import com.example.vmatchu.Interfaces.OnItemClick;
 import com.example.vmatchu.Pojo.CityAreaSubareaSectorDetailsResponse;
-import com.example.vmatchu.R;
 import com.example.vmatchu.SharedPrefs.SaveInSharedPreference;
 
 import java.util.ArrayList;
 
-public class cityAdapter extends RecyclerView.Adapter<cityAdapter.ViewHolderCity>{
+public class AreaAdapter extends RecyclerView.Adapter<AreaAdapter.ViewHolderArea>{
 
-    private ArrayList<CityAreaSubareaSectorDetailsResponse> city;
+    private ArrayList<CityAreaSubareaSectorDetailsResponse> area;
     private Context context;
     private LayoutInflater mInflater;
     private OnItemClick itemClick;
     SaveInSharedPreference saveInSharedPreference;
     Dialog dialog;
-    AutoCompleteTextView citytxt;
+    AutoCompleteTextView areatxt;
     DBhelper dBhelper;
 
-    public cityAdapter(ArrayList<CityAreaSubareaSectorDetailsResponse> city, Context context, Dialog dialog, AutoCompleteTextView citytxt) {
-        this.city = city;
+    public AreaAdapter(ArrayList<CityAreaSubareaSectorDetailsResponse> area, Context context, Dialog dialog, AutoCompleteTextView areatxt) {
+        this.area = area;
         this.context=context;
         this.mInflater = LayoutInflater.from(context);
         saveInSharedPreference = new SaveInSharedPreference(context);
         this.dialog = dialog;
-        this.citytxt = citytxt;
+        this.areatxt = areatxt;
         dBhelper = new DBhelper(context);
     }
 
 
     @NonNull
     @Override
-    public ViewHolderCity onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public ViewHolderArea onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
 
         View view= mInflater.inflate(R.layout.city,null);
-        return new ViewHolderCity(view);
+        return new ViewHolderArea(view);
 
     }
 //
@@ -61,18 +58,18 @@ public class cityAdapter extends RecyclerView.Adapter<cityAdapter.ViewHolderCity
 //    }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolderCity viewHolderCity, final int i) {
+    public void onBindViewHolder(@NonNull ViewHolderArea viewHolderArea, final int i) {
 //        ViewHolderCityviewHolderCity=(ViewHolderCity)viewHolder;
-        ViewHolderCity viewHolder1 =(ViewHolderCity)viewHolderCity;
-        String cityName=city.get(i).getName();
-        viewHolder1.city_ed.setText(cityName);
+        ViewHolderArea viewHolder1 =(ViewHolderArea)viewHolderArea;
+        String areaName=area.get(i).getName();
+        viewHolder1.area_ed.setText(areaName);
 
         viewHolder1.relative_row_city.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String term_id = city.get(i).getTermId();
-                saveInSharedPreference.saveCityId(term_id);
-                citytxt.setText(dBhelper.getCityById(term_id));
+                String term_id = area.get(i).getTermId();
+                saveInSharedPreference.saveAreaId(term_id);
+                areatxt.setText(dBhelper.getAreaById(term_id));
                 dialog.dismiss();
             }
         });
@@ -82,8 +79,8 @@ public class cityAdapter extends RecyclerView.Adapter<cityAdapter.ViewHolderCity
 
     @Override
     public int getItemCount() {
-        if(city!=null){
-            return city.size();
+        if(area!=null){
+            return area.size();
         }
         else {
             return 0;
@@ -92,19 +89,19 @@ public class cityAdapter extends RecyclerView.Adapter<cityAdapter.ViewHolderCity
 
 
 
-    public class ViewHolderCity extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ViewHolderArea extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         RelativeLayout relative_row_city;
-        TextView city_ed;
+        TextView area_ed;
 
 
 
 
-        public ViewHolderCity(@NonNull View itemView) {
+        public ViewHolderArea(@NonNull View itemView) {
             super(itemView);
 
             relative_row_city = itemView.findViewById(R.id.relative_row_city);
-            city_ed=itemView.findViewById(R.id.City_ed);
+            area_ed=itemView.findViewById(R.id.City_ed);
 //
 //            itemView.setClickable(true);
 //            itemView.setOnClickListener((View.OnClickListener) this);

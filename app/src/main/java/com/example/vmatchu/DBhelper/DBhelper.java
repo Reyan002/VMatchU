@@ -169,14 +169,35 @@ public class DBhelper extends SQLiteOpenHelper {
         if (c != null && c.moveToFirst()) {
             do {
 
-                arrayList.add(new CityAreaSubareaSectorDetailsResponse(c.getString(1),
-                        c.getString(2)));
+                arrayList.add(new CityAreaSubareaSectorDetailsResponse(c.getString(0),
+                        c.getString(1)));
 
             } while (c.moveToNext());
         }
         c.close();
         db.close();
         return arrayList;
+    }
+
+    public String getCityById(String term_id) {
+        ArrayList<CityAreaSubareaSectorDetailsResponse> arrayList = new ArrayList<>();
+        db = getWritableDatabase();
+        String city = "";
+        String query = "SELECT property_name FROM " + TABLE_CITY + " WHERE term_id = "+term_id+"";
+
+        Cursor c = db.rawQuery(query, null);
+        if (c != null && c.moveToFirst()) {
+            do {
+
+                city = c.getString(0);
+//                arrayList.add(new CityAreaSubareaSectorDetailsResponse(c.getString(0),
+//                        c.getString(1)));
+
+            } while (c.moveToNext());
+        }
+        c.close();
+        db.close();
+        return city;
     }
 
     public void addArea(String term_id, String property_name) {
@@ -210,6 +231,27 @@ public class DBhelper extends SQLiteOpenHelper {
         return arrayList;
     }
 
+    public String getAreaById(String term_id) {
+        ArrayList<CityAreaSubareaSectorDetailsResponse> arrayList = new ArrayList<>();
+        db = getWritableDatabase();
+        String area = "";
+        String query = "SELECT property_name FROM " + TABLE_AREA + " WHERE term_id = "+term_id+"";
+
+        Cursor c = db.rawQuery(query, null);
+        if (c != null && c.moveToFirst()) {
+            do {
+
+                area = c.getString(0);
+//                arrayList.add(new CityAreaSubareaSectorDetailsResponse(c.getString(0),
+//                        c.getString(1)));
+
+            } while (c.moveToNext());
+        }
+        c.close();
+        db.close();
+        return area;
+    }
+
     public void addSubArea(String term_id, String property_name) {
         ContentValues contentValues = new ContentValues();
 
@@ -241,6 +283,27 @@ public class DBhelper extends SQLiteOpenHelper {
         return arrayList;
     }
 
+    public String getSubAreaById(String term_id) {
+        ArrayList<CityAreaSubareaSectorDetailsResponse> arrayList = new ArrayList<>();
+        db = getWritableDatabase();
+        String sub_area = "";
+        String query = "SELECT property_name FROM " + TABLE_SUB_AREA + " WHERE term_id = "+term_id+"";
+
+        Cursor c = db.rawQuery(query, null);
+        if (c != null && c.moveToFirst()) {
+            do {
+
+                sub_area = c.getString(0);
+//                arrayList.add(new CityAreaSubareaSectorDetailsResponse(c.getString(0),
+//                        c.getString(1)));
+
+            } while (c.moveToNext());
+        }
+        c.close();
+        db.close();
+        return sub_area;
+    }
+
     public void addSector(String term_id, String property_name) {
         ContentValues contentValues = new ContentValues();
 
@@ -270,6 +333,27 @@ public class DBhelper extends SQLiteOpenHelper {
         c.close();
         db.close();
         return arrayList;
+    }
+
+    public String getSectorById(String term_id) {
+        ArrayList<CityAreaSubareaSectorDetailsResponse> arrayList = new ArrayList<>();
+        db = getWritableDatabase();
+        String sector = "";
+        String query = "SELECT property_name FROM " + TABLE_SECTOR + " WHERE term_id = "+term_id+"";
+
+        Cursor c = db.rawQuery(query, null);
+        if (c != null && c.moveToFirst()) {
+            do {
+
+                sector = c.getString(0);
+//                arrayList.add(new CityAreaSubareaSectorDetailsResponse(c.getString(0),
+//                        c.getString(1)));
+
+            } while (c.moveToNext());
+        }
+        c.close();
+        db.close();
+        return sector;
     }
 
     public void addAreaType(String term_id, String property_name) {

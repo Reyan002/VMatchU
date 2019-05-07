@@ -61,14 +61,14 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         switch (v.getId()){
             case R.id.signUp:
                 progressDialog.show();
-                startActivity(new Intent(SignUpActivity.this,HomeActivity.class));
-//                uname = et_uname.getText().toString();
-//                pass = et_password.getText().toString();
-//                email = et_email.getText().toString();
-//
-//                if(!TextUtils.isEmpty(uname) && !TextUtils.isEmpty(pass) && !TextUtils.isEmpty(email)) {
-//                    postSignUpApi(uname, email, pass);
-//                }
+//                startActivity(new Intent(SignUpActivity.this,HomeActivity.class));
+                uname = et_uname.getText().toString();
+                pass = et_password.getText().toString();
+                email = et_email.getText().toString();
+
+                if(!TextUtils.isEmpty(uname) && !TextUtils.isEmpty(pass) && !TextUtils.isEmpty(email)) {
+                    postSignUpApi(uname, email, pass);
+                }
                 break;
 
         }

@@ -16,7 +16,7 @@
         <activity
             android:name=".myProperty"
             android:label="@string/title_activity_my_property"
-            android:theme="@style/AppTheme.NoActionBar" />
+        android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".EnterPropertyDetailActivity" />
         <activity android:name=".myProfileActivity" />
         <activity android:name=".Home2activity" />

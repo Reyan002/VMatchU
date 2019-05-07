@@ -1,11 +1,13 @@
 package com.example.vmatchu;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.ClipData;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.provider.MediaStore;
 import android.support.annotation.RequiresApi;
@@ -24,12 +26,15 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.vmatchu.Adpaters.AreaAdapter;
 import com.example.vmatchu.Adpaters.PropertyAdapter;
 import com.example.vmatchu.Adpaters.cityAdapter;
 import com.example.vmatchu.CustomAlert.CustomAlert;
 import com.example.vmatchu.DBhelper.DBhelper;
+import com.example.vmatchu.Interfaces.OnItemClick;
 import com.example.vmatchu.Pojo.AreaResponse;
 import com.example.vmatchu.Pojo.AreaTypeResponse;
 import com.example.vmatchu.Pojo.CityAreaSubareaSectorDetailsResponse;
@@ -40,7 +45,9 @@ import com.example.vmatchu.Pojo.SubAreaResponse;
 import com.example.vmatchu.Pojo.UserSignup;
 import com.example.vmatchu.Rest.APIService;
 import com.example.vmatchu.Rest.ApiUtil;
+import com.example.vmatchu.SharedPrefs.SaveInSharedPreference;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,7 +73,6 @@ public class EnterPropertyDetailActivity extends AppCompatActivity implements Vi
     private Button submit;
     private APIService apiService;
     private ProgressDialog progressDialog;
-    private AlertDialog dialog;
     private String cityName,areaName,subareaName,sectorName;
 private String cityId,areaId,subareaId,sectorId;
     private String[] proType = { "None","Agriculture/Dairy","Apartment/Flat","Banglow/House","Commercial Plot","Commercial Portion/Office Area","Farm House","Hotel","Industrial land","Industrial Plot" ,"Land","Penthouse","Plot","Plot File","Residential Lower Portion","Residential Upper Portion","Restuarent","Shop/Showroom","villa"};//array of strings used to populate the spinner
@@ -78,7 +84,9 @@ private String cityId,areaId,subareaId,sectorId;
     private ArrayList<CityAreaSubareaSectorDetailsResponse> subArea=new ArrayList<>();
     private ArrayList<CityAreaSubareaSectorDetailsResponse> sector=new ArrayList<>();
     private ArrayList<String> areaTypeArray=new ArrayList<>();
-    private RecyclerView.Adapter adapter;
+    cityAdapter adapter;
+    AreaAdapter areaAdapter;
+    RecyclerView recyclerView;
 
     private SpinnerDialog spinnnerDialogue,spinnerDialog,DialogAreaType;
 
@@ -108,10 +116,10 @@ private String cityId,areaId,subareaId,sectorId;
         country.add("Iraq");
         country.add("Dubai");
         country.add("America");
-        city = dBhelper.getCities();
-        area = dBhelper.getArea();
-        subArea = dBhelper.getSubArea();
-        sector = dBhelper.getSector();
+
+//        area = dBhelper.getArea();
+//        subArea = dBhelper.getSubArea();
+//        sector = dBhelper.getSector();
 
 
 
@@ -227,16 +235,39 @@ private String cityId,areaId,subareaId,sectorId;
 
             @Override
             public void onResponse(Call<CityResponse> call, Response<CityResponse> response) {
-                if(response.isSuccessful()) {
+                if(response.isSuccessful()){
+                    city.clear();
                     CityResponse cityResponse = response.body();
                     if(cityResponse.getError().equals("-1")){
+                        dBhelper.emptyTable("city");
                         for(int i=0; i < cityResponse.getCity().size(); i++){
                             dBhelper.addCities(cityResponse.getCity().get(i).getTermId(),
                                     cityResponse.getCity().get(i).getName());
 
 
                         }
-                        progressDialog.dismiss();
+                        city = dBhelper.getCities();
+
+
+//                        View view1=getLayoutInflater().inflate(R.layout.show_city,null);
+//                        AlertDialog.Builder builder = new AlertDialog.Builder(EnterPropertyDetailActivity.this);
+                        final Dialog dialog = new Dialog(EnterPropertyDetailActivity.this);
+                        dialog.setContentView(R.layout.show_city);
+                        recyclerView = dialog.findViewById(R.id.showCity);
+                        RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(EnterPropertyDetailActivity.this);
+                        recyclerView.setLayoutManager(layoutManager);
+//                        AlertDialog dialog = builder.create();
+//                        builder.setCancelable(false);
+//                        builder.setView(view1);
+
+                        adapter=new cityAdapter(city,EnterPropertyDetailActivity.this,dialog,citytxt);
+                        recyclerView.setAdapter(adapter);
+//                        adapter.setItemClick(EnterPropertyDetailActivity.this);
+                        dialog.show();
+
+//                        citytxt.setText(dBhelper.getCityById(SaveInSharedPreference.getInSharedPreference(EnterPropertyDetailActivity.this).getCityId()));
+
+
                     }else{
                         CustomAlert.alertDialog(EnterPropertyDetailActivity.this,"Cities Not Fetched");
                     }
@@ -257,7 +288,7 @@ private String cityId,areaId,subareaId,sectorId;
         title=(TextInputEditText) findViewById(R.id.pro_title_ed) ;
 //        areaType=(TextInputEditText) findViewById(R.id.areaType_ed) ;
         countrytxt=(AutoCompleteTextView)findViewById(R.id.Country_ed) ;
-        //citytxt=(AutoCompleteTextView)findViewById(R.id.City_ed) ;
+        citytxt=(AutoCompleteTextView)findViewById(R.id.City_ed) ;
 
 
 
@@ -274,29 +305,17 @@ private String cityId,areaId,subareaId,sectorId;
         details = (TextInputEditText)findViewById(R.id.desc_ed);
         video_url = (TextInputEditText)findViewById(R.id.vedioURL_ed);
         image360_url = (TextInputEditText)findViewById(R.id.image360_ed);
+
         dBhelper = new DBhelper(this);
         submit=findViewById(R.id.submitProp) ;
 
         submit.setOnClickListener(this);
-        //citytxt.setOnClickListener(this);
+        citytxt.setOnClickListener(this);
         areatxt.setOnClickListener(this);
         subareatxt.setOnClickListener(this);
         sectortxt.setOnClickListener(this);
         areaType.setOnClickListener(this);
 //        submit.setOnClickListener(this);
-
-        AlertDialog.Builder builder=new AlertDialog.Builder(EnterPropertyDetailActivity.this);
-        View view1=getLayoutInflater().inflate(R.layout.show_city,null);
-        RecyclerView recyclerView=(RecyclerView)findViewById(R.id.showCity);
-        RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-        adapter=new cityAdapter(city,this);
-        recyclerView.setAdapter(adapter);
-       dialog = builder.create();
-
-
-
-
 
 
 
@@ -392,15 +411,13 @@ private String cityId,areaId,subareaId,sectorId;
                 break;
 
             case R.id.City_ed:
-                progressDialog.show();
+//                new FetchCity().execute();
                 getCitiesApi();
-                dialog.show();
-
                 break;
 
             case R.id.Area_ed:
                 progressDialog.show();
-               // getAreaApi();
+                getAreaApi();
                // spinnnerDialogue.showSpinerDialog();
                 break;
 
@@ -528,37 +545,61 @@ private String cityId,areaId,subareaId,sectorId;
 //        });
 //    }
 //
-//    private void getAreaApi() {
-//        Call<AreaResponse> call = apiService.getArea(cityId);
-//
-//        call.enqueue(new Callback<AreaResponse>() {
-//
-//            @Override
-//            public void onResponse(Call<AreaResponse> call, Response<AreaResponse> response) {
-//                if(response.isSuccessful()) {
-//                    AreaResponse areaResponse = response.body();
-//                    if(areaResponse.getError().equals("-1")){
-//                        for(int i=0; i < areaResponse.getAreas().size(); i++){
-//                            dBhelper.addArea(areaResponse.getAreas().get(i).getTermId(),
-//                                    areaResponse.getAreas().get(i).getName());
-//                        }
-//                        progressDialog.dismiss();
-//                    }else{
-//                        progressDialog.dismiss();
-//                        CustomAlert.alertDialog(EnterPropertyDetailActivity.this,"Areas Not Fetched");
-//                    }
-//                    Log.i("response", "post submitted to API." + areaResponse);
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<AreaResponse> call, Throwable t) {
-//                progressDialog.dismiss();
-//                CustomAlert.alertDialog(EnterPropertyDetailActivity.this,"Response Failed");
-//                Log.e("response_Failed", "Unable to submit post to API." + t);
-//            }
-//        });
-//    }
+    private void getAreaApi() {
+        Call<AreaResponse> call = apiService.getArea(SaveInSharedPreference.getInSharedPreference(EnterPropertyDetailActivity.this).getCityId());
+
+        call.enqueue(new Callback<AreaResponse>() {
+
+            @Override
+            public void onResponse(Call<AreaResponse> call, Response<AreaResponse> response) {
+                if(response.isSuccessful()) {
+                    AreaResponse areaResponse = response.body();
+                    if(areaResponse.getError().equals("-1")){
+                        dBhelper.emptyTable("area");
+                        for(int i=0; i < areaResponse.getAreas().size(); i++){
+                            dBhelper.addArea(areaResponse.getAreas().get(i).getTermId(),
+                                    areaResponse.getAreas().get(i).getName());
+
+
+                        }
+                        area = dBhelper.getArea();
+
+
+//                        View view1=getLayoutInflater().inflate(R.layout.show_city,null);
+//                        AlertDialog.Builder builder = new AlertDialog.Builder(EnterPropertyDetailActivity.this);
+                        final Dialog dialog = new Dialog(EnterPropertyDetailActivity.this);
+                        dialog.setContentView(R.layout.show_city);
+                        recyclerView = dialog.findViewById(R.id.showCity);
+                        RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(EnterPropertyDetailActivity.this);
+                        recyclerView.setLayoutManager(layoutManager);
+//                        AlertDialog dialog = builder.create();
+//                        builder.setCancelable(false);
+//                        builder.setView(view1);
+
+                        areaAdapter = new AreaAdapter(area,EnterPropertyDetailActivity.this,dialog,areatxt);
+                        recyclerView.setAdapter(adapter);
+//                        adapter.setItemClick(EnterPropertyDetailActivity.this);
+                        dialog.show();
+
+//                        citytxt.setText(dBhelper.getCityById(SaveInSharedPreference.getInSharedPreference(EnterPropertyDetailActivity.this).getCityId()));
+
+
+                    }else{
+                        progressDialog.dismiss();
+                        CustomAlert.alertDialog(EnterPropertyDetailActivity.this,"Areas Not Fetched");
+                    }
+                    Log.i("response", "post submitted to API." + areaResponse);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<AreaResponse> call, Throwable t) {
+                progressDialog.dismiss();
+                CustomAlert.alertDialog(EnterPropertyDetailActivity.this,"Response Failed");
+                Log.e("response_Failed", "Unable to submit post to API." + t);
+            }
+        });
+    }
 
     private void postPropertyDetails() {
         Call<InsertPropertyResponse> call = apiService.postInsertSellProperty(title.getText().toString(),"1", spin_val_type, spin_val_status,
@@ -591,5 +632,11 @@ private String cityId,areaId,subareaId,sectorId;
             }
         });
     }
+
+//    @Override
+//    public void onItemClicked(int position) {
+//        cityId = city.get(position).getTermId();
+//    }
+
 }
 
