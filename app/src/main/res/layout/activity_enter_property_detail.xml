@@ -96,38 +96,45 @@
                 android:layout_height="wrap_content" />
             <GridLayout
 
+
                 android:padding="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:rowCount="2"
                 android:columnCount="3"
                 >
-                <AutoCompleteTextView
-
+                <TextView
+                    android:textSize="18sp"
+                    android:layout_margin="10dp"
                     android:id="@+id/Country_ed"
                     android:layout_width="110dp"
                     android:layout_height="wrap_content"
                     android:hint="Country" />
-                <AutoCompleteTextView
-
+                <TextView
+                    android:textSize="18sp"
+                    android:layout_margin="10dp"
                     android:id="@+id/City_ed_ed"
                     android:layout_width="110dp"
                     android:layout_height="wrap_content"
                     android:hint="City" />
-                <AutoCompleteTextView
-
+                <TextView
+                    android:textSize="18sp"
+                    android:layout_margin="10dp"
                     android:id="@+id/Area_ed"
                     android:layout_width="110dp"
                     android:layout_height="wrap_content"
                     android:hint="Area" />
 
-                <AutoCompleteTextView
+                <TextView
+                    android:textSize="18sp"
+                    android:layout_margin="10dp"
                     android:id="@+id/Subarea_ed"
                     android:layout_width="110dp"
                     android:layout_height="wrap_content"
                     android:hint="Sub-Area" />
-                <AutoCompleteTextView
-
+                <TextView
+                    android:textSize="18sp"
+                    android:layout_margin="10dp"
                 android:id="@+id/sector_ed"
                 android:layout_width="110dp"
                 android:layout_height="wrap_content"

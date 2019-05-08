@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.example.vmatchu.DBhelper.DBhelper;
 import com.example.vmatchu.Interfaces.OnItemClick;
 import com.example.vmatchu.Pojo.CityAreaSubareaSectorDetailsResponse;
+import com.example.vmatchu.R;
 import com.example.vmatchu.SharedPrefs.SaveInSharedPreference;
 
 import java.util.ArrayList;
@@ -91,7 +92,7 @@ public class AreaAdapter extends RecyclerView.Adapter<AreaAdapter.ViewHolderArea
 
     public class ViewHolderArea extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        RelativeLayout relative_row_city;
+        RelativeLayout relative_rowcity;
         TextView area_ed;
 
 
@@ -99,8 +100,7 @@ public class AreaAdapter extends RecyclerView.Adapter<AreaAdapter.ViewHolderArea
 
         public ViewHolderArea(@NonNull View itemView) {
             super(itemView);
-
-            relative_row_city = itemView.findViewById(R.id.relative_row_city);
+            relative_rowcity = itemView.findViewById(R.id.relative_row_city);
             area_ed=itemView.findViewById(R.id.City_ed);
 //
 //            itemView.setClickable(true);

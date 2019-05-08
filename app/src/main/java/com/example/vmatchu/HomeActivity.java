@@ -53,6 +53,7 @@ public class HomeActivity extends AppCompatActivity
         setContentView(R.layout.activity_home);
 
         initialize();
+
 //        getPropertyTypeData();
 
         final Dialog dialog = new Dialog(this);
