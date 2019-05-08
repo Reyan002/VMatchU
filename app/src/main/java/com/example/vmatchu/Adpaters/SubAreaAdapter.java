@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.example.vmatchu.DBhelper.DBhelper;
 import com.example.vmatchu.Interfaces.OnItemClick;
 import com.example.vmatchu.Pojo.CityAreaSubareaSectorDetailsResponse;
+import com.example.vmatchu.R;
 import com.example.vmatchu.SharedPrefs.SaveInSharedPreference;
 
 import java.util.ArrayList;
@@ -44,7 +45,7 @@ public class SubAreaAdapter extends RecyclerView.Adapter<SubAreaAdapter.ViewHold
     @Override
     public ViewHolderSubArea onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
 
-        View view= mInflater.inflate(R.layout.city,null);
+        View view= mInflater.inflate(R.layout.subarea,null);
         return new ViewHolderSubArea(view);
 
     }
@@ -100,8 +101,8 @@ public class SubAreaAdapter extends RecyclerView.Adapter<SubAreaAdapter.ViewHold
         public ViewHolderSubArea(@NonNull View itemView) {
             super(itemView);
 
-            relative_row_city = itemView.findViewById(R.id.relative_row_city);
-            subbarea_ed=itemView.findViewById(R.id.City_ed);
+            relative_row_city = itemView.findViewById(R.id.relative_row_subarea);
+            subbarea_ed=itemView.findViewById(R.id.subarea_ed);
 //
 //            itemView.setClickable(true);
 //            itemView.setOnClickListener((View.OnClickListener) this);

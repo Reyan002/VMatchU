@@ -109,8 +109,7 @@
                     android:layout_height="wrap_content"
                     android:hint="Country" />
                 <AutoCompleteTextView
-
-                    android:id="@+id/City_ed_ed"
+                    android:id="@+id/City_ed"
                     android:layout_width="110dp"
                     android:layout_height="wrap_content"
                     android:hint="City" />

@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.AutoCompleteTextView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import com.example.vmatchu.R;
 
 import com.example.vmatchu.DBhelper.DBhelper;
 import com.example.vmatchu.Interfaces.OnItemClick;
@@ -44,7 +45,7 @@ public class AreaAdapter extends RecyclerView.Adapter<AreaAdapter.ViewHolderArea
     @Override
     public ViewHolderArea onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
 
-        View view= mInflater.inflate(R.layout.city,null);
+        View view = mInflater.inflate(R.layout.area,null);
         return new ViewHolderArea(view);
 
     }
@@ -64,7 +65,7 @@ public class AreaAdapter extends RecyclerView.Adapter<AreaAdapter.ViewHolderArea
         String areaName=area.get(i).getName();
         viewHolder1.area_ed.setText(areaName);
 
-        viewHolder1.relative_row_city.setOnClickListener(new View.OnClickListener() {
+        viewHolder1.relative_row_area.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String term_id = area.get(i).getTermId();
@@ -91,7 +92,7 @@ public class AreaAdapter extends RecyclerView.Adapter<AreaAdapter.ViewHolderArea
 
     public class ViewHolderArea extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        RelativeLayout relative_row_city;
+        RelativeLayout relative_row_area;
         TextView area_ed;
 
 
@@ -100,8 +101,8 @@ public class AreaAdapter extends RecyclerView.Adapter<AreaAdapter.ViewHolderArea
         public ViewHolderArea(@NonNull View itemView) {
             super(itemView);
 
-            relative_row_city = itemView.findViewById(R.id.relative_row_city);
-            area_ed=itemView.findViewById(R.id.City_ed);
+            relative_row_area = itemView.findViewById(R.id.relative_row_area);
+            area_ed=itemView.findViewById(R.id.area_ed);
 //
 //            itemView.setClickable(true);
 //            itemView.setOnClickListener((View.OnClickListener) this);

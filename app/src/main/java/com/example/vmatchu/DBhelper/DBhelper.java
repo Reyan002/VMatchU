@@ -221,8 +221,8 @@ public class DBhelper extends SQLiteOpenHelper {
         if (c != null && c.moveToFirst()) {
             do {
 
-                arrayList.add(new CityAreaSubareaSectorDetailsResponse(c.getString(1),
-                        c.getString(2)));
+                arrayList.add(new CityAreaSubareaSectorDetailsResponse(c.getString(0),
+                        c.getString(1)));
 
             } while (c.moveToNext());
         }
@@ -273,8 +273,8 @@ public class DBhelper extends SQLiteOpenHelper {
         if (c != null && c.moveToFirst()) {
             do {
 
-                arrayList.add(new CityAreaSubareaSectorDetailsResponse(c.getString(1),
-                        c.getString(2)));
+                arrayList.add(new CityAreaSubareaSectorDetailsResponse(c.getString(0),
+                        c.getString(1)));
 
             } while (c.moveToNext());
         }
@@ -325,8 +325,8 @@ public class DBhelper extends SQLiteOpenHelper {
         if (c != null && c.moveToFirst()) {
             do {
 
-                arrayList.add(new CityAreaSubareaSectorDetailsResponse(c.getString(1),
-                        c.getString(2)));
+                arrayList.add(new CityAreaSubareaSectorDetailsResponse(c.getString(0),
+                        c.getString(1)));
 
             } while (c.moveToNext());
         }

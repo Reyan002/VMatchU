@@ -17,6 +17,7 @@ import com.example.vmatchu.Pojo.UserSignup;
 import com.example.vmatchu.R;
 import com.example.vmatchu.Rest.APIService;
 import com.example.vmatchu.Rest.ApiUtil;
+import com.example.vmatchu.SharedPrefs.SaveInSharedPreference;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -71,6 +72,7 @@ public class signInActivity extends AppCompatActivity {
                     progressDialog.dismiss();
                     UserLogin signupResponse = response.body();
                     if(signupResponse.getError().equals("-1")){
+                        SaveInSharedPreference.getInSharedPreference(signInActivity.this).saveUserId(signupResponse.getId());
                         startActivity(new Intent(signInActivity.this,HomeActivity.class));
                     }
                     Log.i("response", "post submitted to API." + signupResponse);

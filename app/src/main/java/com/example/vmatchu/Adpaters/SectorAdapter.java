@@ -15,6 +15,7 @@ import com.example.vmatchu.DBhelper.DBhelper;
 import com.example.vmatchu.Interfaces.OnItemClick;
 import com.example.vmatchu.Pojo.CityAreaSubareaSectorDetailsResponse;
 import com.example.vmatchu.SharedPrefs.SaveInSharedPreference;
+import com.example.vmatchu.R;
 
 import java.util.ArrayList;
 
@@ -44,7 +45,7 @@ public class SectorAdapter extends RecyclerView.Adapter<SectorAdapter.ViewHolder
     @Override
     public ViewHolderSector onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
 
-        View view= mInflater.inflate(R.layout.city,null);
+        View view= mInflater.inflate(R.layout.sector,null);
         return new ViewHolderSector(view);
 
     }
@@ -100,8 +101,8 @@ public class SectorAdapter extends RecyclerView.Adapter<SectorAdapter.ViewHolder
         public ViewHolderSector(@NonNull View itemView) {
             super(itemView);
 
-            relative_row_city = itemView.findViewById(R.id.relative_row_city);
-            sector_ed=itemView.findViewById(R.id.City_ed);
+            relative_row_city = itemView.findViewById(R.id.relative_row_sector);
+            sector_ed=itemView.findViewById(R.id.sector_ed);
 //
 //            itemView.setClickable(true);
 //            itemView.setOnClickListener((View.OnClickListener) this);
