@@ -33,6 +33,8 @@ import android.widget.Toast;
 
 import com.example.vmatchu.Adpaters.AreaAdapter;
 import com.example.vmatchu.Adpaters.PropertyAdapter;
+import com.example.vmatchu.Adpaters.SectorAdapter;
+import com.example.vmatchu.Adpaters.SubAreaAdapter;
 import com.example.vmatchu.Adpaters.cityAdapter;
 import com.example.vmatchu.CustomAlert.CustomAlert;
 import com.example.vmatchu.DBhelper.DBhelper;
@@ -88,7 +90,12 @@ private String cityId,areaId,subareaId,sectorId;
     private ArrayList<String> areaTypeArray=new ArrayList<>();
     cityAdapter adapter;
     AreaAdapter areaAdapter;
+    SubAreaAdapter subAreaAdapter;
+    SectorAdapter sectorAdapter;
     RecyclerView recyclerView;
+    RecyclerView recyclerViewArea;
+    RecyclerView recyclerViewSubArea;
+    RecyclerView recyclerViewSector;
 
     private SpinnerDialog spinnnerDialogue,spinnerDialog,DialogAreaType;
 
@@ -122,9 +129,9 @@ private String cityId,areaId,subareaId,sectorId;
 
 
 
-        area = dBhelper.getArea();
-        subArea = dBhelper.getSubArea();
-        sector = dBhelper.getSector();
+//        area = dBhelper.getArea();
+//        subArea = dBhelper.getSubArea();
+//        sector = dBhelper.getSector();
 
 
         areaTypeArray.add("None");
@@ -291,7 +298,7 @@ private String cityId,areaId,subareaId,sectorId;
         title=(TextInputEditText) findViewById(R.id.pro_title_ed) ;
 //        areaType=(TextInputEditText) findViewById(R.id.areaType_ed) ;
         countrytxt=(AutoCompleteTextView)findViewById(R.id.Country_ed) ;
-        citytxt=(AutoCompleteTextView)findViewById(R.id.City_ed) ;
+        citytxt=(AutoCompleteTextView)findViewById(R.id.City_ed);
 
 
 
@@ -417,20 +424,17 @@ private String cityId,areaId,subareaId,sectorId;
                 break;
 
             case R.id.Area_ed:
-                progressDialog.show();
                 getAreaApi();
                // spinnnerDialogue.showSpinerDialog();
                 break;
 
             case R.id.Subarea_ed:
-                progressDialog.show();
-               // getSubAreaApi();
+                getSubAreaApi();
                // spinnnerDialogue.showSpinerDialog();
                 break;
 
             case R.id.sector_ed:
-                progressDialog.show();
-               // getSectorsApi();
+                getSectorsApi();
               //  spinnnerDialogue.showSpinerDialog();
                 break;
 
@@ -482,70 +486,118 @@ private String cityId,areaId,subareaId,sectorId;
         });
     }
 
-//    private void getSectorsApi() {
-//        Call<SectorResponse> call = apiService.getSector();
+    private void getSectorsApi() {
+        Call<SectorResponse> call = apiService.getSector(SaveInSharedPreference.getInSharedPreference(this).getSubAreaId());
+
+        call.enqueue(new Callback<SectorResponse>() {
+
+            @Override
+            public void onResponse(Call<SectorResponse> call, Response<SectorResponse> response) {
+                if(response.isSuccessful()) {
+                    SectorResponse sectorResponse = response.body();
+                    if(sectorResponse.getError().equals("-1")){
+                        dBhelper.emptyTable("sector");
+                        for(int i=0; i < sectorResponse.getSectors().size(); i++){
+                            dBhelper.addSector(sectorResponse.getSectors().get(i).getTermId(),
+                                    sectorResponse.getSectors().get(i).getName());
+
+
+                        }
+                        sector = dBhelper.getSector();
+
+
+//                        View view1=getLayoutInflater().inflate(R.layout.show_city,null);
+//                        AlertDialog.Builder builder = new AlertDialog.Builder(EnterPropertyDetailActivity.this);
+                        final Dialog dialogSector = new Dialog(EnterPropertyDetailActivity.this);
+                        dialogSector.setContentView(R.layout.show_sector);
+                        recyclerViewSector = dialogSector.findViewById(R.id.showSector);
+                        RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(EnterPropertyDetailActivity.this);
+                        recyclerViewSector.setLayoutManager(layoutManager);
+//                        AlertDialog dialog = builder.create();
+//                        builder.setCancelable(false);
+//                        builder.setView(view1);
+
+                        sectorAdapter = new SectorAdapter(sector,EnterPropertyDetailActivity.this,dialogSector,sectortxt);
+                        recyclerViewSector.setAdapter(sectorAdapter);
+//                        adapter.setItemClick(EnterPropertyDetailActivity.this);
+                        dialogSector.show();
+
+//                        citytxt.setText(dBhelper.getCityById(SaveInSharedPreference.getInSharedPreference(EnterPropertyDetailActivity.this).getCityId()));
+
+
+                    }else{
+                        progressDialog.dismiss();
+                        CustomAlert.alertDialog(EnterPropertyDetailActivity.this,"Sectors Not Fetched");
+                    }
+                    Log.i("response", "post submitted to API." + sectorResponse);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<SectorResponse> call, Throwable t) {
+                progressDialog.dismiss();
+                CustomAlert.alertDialog(EnterPropertyDetailActivity.this,"Response Failed");
+                Log.e("response_Failed", "Unable to submit post to API." + t);
+            }
+        });
+    }
 //
-//        call.enqueue(new Callback<SectorResponse>() {
-//
-//            @Override
-//            public void onResponse(Call<SectorResponse> call, Response<SectorResponse> response) {
-//                if(response.isSuccessful()) {
-//                    SectorResponse subAreaResponse = response.body();
-//                    if(subAreaResponse.getError().equals("-1")){
-//                        for(int i=0; i < subAreaResponse.getSectors().size(); i++){
-//                            dBhelper.addSector(subAreaResponse.getSectors().get(i).getTermId(),
-//                                    subAreaResponse.getSectors().get(i).getName());
-//                        }
-//                        progressDialog.dismiss();
-//                    }else{
-//                        progressDialog.dismiss();
-//                        CustomAlert.alertDialog(EnterPropertyDetailActivity.this,"Sectors Not Fetched");
-//                    }
-//                    Log.i("response", "post submitted to API." + subAreaResponse);
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<SectorResponse> call, Throwable t) {
-//                progressDialog.dismiss();
-//                CustomAlert.alertDialog(EnterPropertyDetailActivity.this,"Response Failed");
-//                Log.e("response_Failed", "Unable to submit post to API." + t);
-//            }
-//        });
-//    }
-//
-//    private void getSubAreaApi() {
-//        Call<SubAreaResponse> call = apiService.getSubArea();
-//
-//        call.enqueue(new Callback<SubAreaResponse>() {
-//
-//            @Override
-//            public void onResponse(Call<SubAreaResponse> call, Response<SubAreaResponse> response) {
-//                if(response.isSuccessful()) {
-//                    SubAreaResponse subAreaResponse = response.body();
-//                    if(subAreaResponse.getError().equals("-1")){
-//                        for(int i=0; i < subAreaResponse.getSubAreas().size(); i++){
-//                            dBhelper.addSubArea(subAreaResponse.getSubAreas().get(i).getTermId(),
-//                                    subAreaResponse.getSubAreas().get(i).getName());
-//                        }
-//                        progressDialog.dismiss();
-//                    }else{
-//                        progressDialog.dismiss();
-//                        CustomAlert.alertDialog(EnterPropertyDetailActivity.this,"Sub Areas Not Fetched");
-//                    }
-//                    Log.i("response", "post submitted to API." + subAreaResponse);
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<SubAreaResponse> call, Throwable t) {
-//                progressDialog.dismiss();
-//                CustomAlert.alertDialog(EnterPropertyDetailActivity.this,"Response Failed");
-//                Log.e("response_Failed", "Unable to submit post to API." + t);
-//            }
-//        });
-//    }
-//
+    private void getSubAreaApi() {
+        Call<SubAreaResponse> call = apiService.getSubArea(SaveInSharedPreference.getInSharedPreference(this).getAreaId());
+
+        call.enqueue(new Callback<SubAreaResponse>() {
+
+            @Override
+            public void onResponse(Call<SubAreaResponse> call, Response<SubAreaResponse> response) {
+                if(response.isSuccessful()) {
+                    SubAreaResponse subAreaResponse = response.body();
+                    if(subAreaResponse.getError().equals("-1")){
+                        dBhelper.emptyTable("subArea");
+                        for(int i=0; i < subAreaResponse.getSubAreas().size(); i++){
+                            dBhelper.addSubArea(subAreaResponse.getSubAreas().get(i).getTermId(),
+                                    subAreaResponse.getSubAreas().get(i).getName());
+
+
+                        }
+                        subArea = dBhelper.getSubArea();
+
+
+//                        View view1=getLayoutInflater().inflate(R.layout.show_city,null);
+//                        AlertDialog.Builder builder = new AlertDialog.Builder(EnterPropertyDetailActivity.this);
+                        final Dialog dialogSubArea = new Dialog(EnterPropertyDetailActivity.this);
+                        dialogSubArea.setContentView(R.layout.show_subarea);
+                        recyclerViewSubArea = dialogSubArea.findViewById(R.id.showSubArea);
+                        RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(EnterPropertyDetailActivity.this);
+                        recyclerViewSubArea.setLayoutManager(layoutManager);
+//                        AlertDialog dialog = builder.create();
+//                        builder.setCancelable(false);
+//                        builder.setView(view1);
+
+                        subAreaAdapter = new SubAreaAdapter(subArea,EnterPropertyDetailActivity.this,dialogSubArea,subareatxt);
+                        recyclerViewSubArea.setAdapter(subAreaAdapter);
+//                        adapter.setItemClick(EnterPropertyDetailActivity.this);
+                        dialogSubArea.show();
+
+//                        citytxt.setText(dBhelper.getCityById(SaveInSharedPreference.getInSharedPreference(EnterPropertyDetailActivity.this).getCityId()));
+
+
+                    }else{
+                        progressDialog.dismiss();
+                        CustomAlert.alertDialog(EnterPropertyDetailActivity.this,"Sub Areas Not Fetched");
+                    }
+                    Log.i("response", "post submitted to API." + subAreaResponse);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<SubAreaResponse> call, Throwable t) {
+                progressDialog.dismiss();
+                CustomAlert.alertDialog(EnterPropertyDetailActivity.this,"Response Failed");
+                Log.e("response_Failed", "Unable to submit post to API." + t);
+            }
+        });
+    }
+
     private void getAreaApi() {
         Call<AreaResponse> call = apiService.getArea(SaveInSharedPreference.getInSharedPreference(EnterPropertyDetailActivity.this).getCityId());
 
@@ -568,25 +620,24 @@ private String cityId,areaId,subareaId,sectorId;
 
 //                        View view1=getLayoutInflater().inflate(R.layout.show_city,null);
 //                        AlertDialog.Builder builder = new AlertDialog.Builder(EnterPropertyDetailActivity.this);
-                        final Dialog dialog = new Dialog(EnterPropertyDetailActivity.this);
-                        dialog.setContentView(R.layout.show_city);
-                        recyclerView = dialog.findViewById(R.id.showCity);
+                        final Dialog dialogarea = new Dialog(EnterPropertyDetailActivity.this);
+                        dialogarea.setContentView(R.layout.show_area);
+                        recyclerViewArea = dialogarea.findViewById(R.id.showArea);
                         RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(EnterPropertyDetailActivity.this);
-                        recyclerView.setLayoutManager(layoutManager);
+                        recyclerViewArea.setLayoutManager(layoutManager);
 //                        AlertDialog dialog = builder.create();
 //                        builder.setCancelable(false);
 //                        builder.setView(view1);
 
-                        areaAdapter = new AreaAdapter(area,EnterPropertyDetailActivity.this,dialog,areatxt);
-                        recyclerView.setAdapter(adapter);
+                        areaAdapter = new AreaAdapter(area,EnterPropertyDetailActivity.this,dialogarea,areatxt);
+                        recyclerViewArea.setAdapter(areaAdapter);
 //                        adapter.setItemClick(EnterPropertyDetailActivity.this);
-                        dialog.show();
+                        dialogarea.show();
 
 //                        citytxt.setText(dBhelper.getCityById(SaveInSharedPreference.getInSharedPreference(EnterPropertyDetailActivity.this).getCityId()));
 
 
                     }else{
-                        progressDialog.dismiss();
                         CustomAlert.alertDialog(EnterPropertyDetailActivity.this,"Areas Not Fetched");
                     }
                     Log.i("response", "post submitted to API." + areaResponse);
@@ -603,9 +654,9 @@ private String cityId,areaId,subareaId,sectorId;
     }
 
     private void postPropertyDetails() {
-        Call<InsertPropertyResponse> call = apiService.postInsertSellProperty(title.getText().toString(),"1", spin_val_type, spin_val_status,
-                countrytxt.getText().toString(),citytxt.getText().toString(),areatxt.getText().toString(),subareatxt.getText().toString(),sectortxt.getText().toString(),
-                price.getText().toString(),size.getText().toString(),areaType.getText().toString(),rooms.getText().toString(),
+        Call<InsertPropertyResponse> call = apiService.postInsertSellProperty(title.getText().toString(),SaveInSharedPreference.getInSharedPreference(this).getUserId(), "1877", "229",
+                countrytxt.getText().toString(),SaveInSharedPreference.getInSharedPreference(this).getCityId(),SaveInSharedPreference.getInSharedPreference(this).getAreaId(),SaveInSharedPreference.getInSharedPreference(this).getSubAreaId(),SaveInSharedPreference.getInSharedPreference(this).getSectorId(),
+                price.getText().toString(),size.getText().toString(),"1503",rooms.getText().toString(),
                 bedroom.getText().toString(),bathroom.getText().toString(),garages.getText().toString(),details.getText().toString(),
                 "image",video_url.getText().toString(),image360_url.getText().toString());
 

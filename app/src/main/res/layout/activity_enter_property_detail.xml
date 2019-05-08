@@ -94,51 +94,62 @@
                 android:text="Property Location *"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
+
             <GridLayout
 
 
-                android:padding="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:rowCount="2"
                 android:columnCount="3"
-                >
+                android:padding="10dp"
+                android:rowCount="2">
+
                 <TextView
-                    android:textSize="18sp"
-                    android:layout_margin="10dp"
                     android:id="@+id/Country_ed"
                     android:layout_width="110dp"
                     android:layout_height="wrap_content"
-                    android:hint="Country" />
-                <TextView
-                    android:textSize="18sp"
                     android:layout_margin="10dp"
+                    android:hint="Country"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:hint="City"
                     android:id="@+id/City_ed_ed"
+                    android:layout_margin="10dp"
+                    android:textSize="18sp"></TextView>
+
+                <TextView
+                    android:id="@+id/City_ed"
+
                     android:layout_width="110dp"
                     android:layout_height="wrap_content"
                     android:hint="City" />
+
                 <TextView
-                    android:textSize="18sp"
-                    android:layout_margin="10dp"
                     android:id="@+id/Area_ed"
                     android:layout_width="110dp"
                     android:layout_height="wrap_content"
-                    android:hint="Area" />
+                    android:layout_margin="10dp"
+                    android:hint="Area"
+                    android:textSize="18sp" />
 
                 <TextView
-                    android:textSize="18sp"
-                    android:layout_margin="10dp"
                     android:id="@+id/Subarea_ed"
                     android:layout_width="110dp"
                     android:layout_height="wrap_content"
-                    android:hint="Sub-Area" />
-                <TextView
-                    android:textSize="18sp"
                     android:layout_margin="10dp"
-                android:id="@+id/sector_ed"
-                android:layout_width="110dp"
-                android:layout_height="wrap_content"
-                android:hint="Sector" />
+                    android:hint="Sub-Area"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/sector_ed"
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:hint="Sector"
+                    android:textSize="18sp" />
 
             </GridLayout>
             <TextView

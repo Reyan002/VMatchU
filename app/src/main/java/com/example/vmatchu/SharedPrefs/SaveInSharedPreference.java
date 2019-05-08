@@ -69,5 +69,17 @@ public class SaveInSharedPreference {
         return preferences.getString("sector_id","");
     }
 
+    public void saveUserId(String id){
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("user_id",id);
+        editor.apply();
+    }
+
+    public String getUserId(){
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        return preferences.getString("user_id","");
+    }
+
 
 }
